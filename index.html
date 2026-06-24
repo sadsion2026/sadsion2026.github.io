@@ -16,68 +16,48 @@
     user-select: none; -webkit-user-select: none;
   }
   #game { display: block; position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
-
   .overlay {
     position: absolute; inset: 0; display: flex; flex-direction: column;
     align-items: center; justify-content: center; text-align: center;
-    color: #f3e9ff; z-index: 10; padding: env(safe-area-inset-top) 6vw env(safe-area-inset-bottom);
-    background: linear-gradient(180deg, rgba(22,13,34,.55), rgba(22,13,34,.86) 70%);
-    backdrop-filter: blur(1px);
+    color: #f3e9ff; z-index: 10; padding: calc(env(safe-area-inset-top) + 10px) 6vw calc(env(safe-area-inset-bottom) + 10px);
+    background: linear-gradient(180deg, rgba(22,13,34,.55), rgba(22,13,34,.86) 70%); backdrop-filter: blur(1px);
   }
   .overlay.hidden { display: none; }
   .title {
     font-size: clamp(36px, 10vw, 86px); font-weight: 900; letter-spacing: 1px; line-height: 1.04;
-    color: #ff7a3d; margin-bottom: 6px;
-    text-shadow: 0 0 18px rgba(255,120,60,.7), 0 0 42px rgba(255,70,40,.5), 0 5px 0 #5a1208;
+    color: #ff7a3d; margin-bottom: 6px; text-shadow: 0 0 18px rgba(255,120,60,.7), 0 0 42px rgba(255,70,40,.5), 0 5px 0 #5a1208;
   }
   .subtitle { font-size: clamp(14px, 3.8vw, 23px); color: #c9a9ff; margin-bottom: 30px; letter-spacing:.5px; }
   .btn {
     font-family: inherit; font-size: clamp(19px, 5vw, 27px); font-weight: 800; color: #1a0e22;
-    background: linear-gradient(180deg, #ffd23f, #ff9a1f);
-    border: none; border-radius: 15px; padding: 15px 40px; cursor: pointer; margin: 8px 0; min-width: 250px;
+    background: linear-gradient(180deg, #ffd23f, #ff9a1f); border: none; border-radius: 15px;
+    padding: 15px 40px; cursor: pointer; margin: 8px 0; min-width: 250px;
     box-shadow: 0 7px 0 #b85e00, 0 14px 28px rgba(0,0,0,.5); transition: transform .06s, box-shadow .06s;
   }
   .btn:active { transform: translateY(5px); box-shadow: 0 2px 0 #b85e00, 0 8px 14px rgba(0,0,0,.5); }
   .btn:disabled { filter: grayscale(.6) brightness(.8); cursor: default; }
-  .btn.secondary {
-    color: #f3e9ff; background: linear-gradient(180deg, #7a4bd0, #4a2a8f);
-    box-shadow: 0 7px 0 #2c1660, 0 14px 28px rgba(0,0,0,.5);
-  }
+  .btn.secondary { color: #f3e9ff; background: linear-gradient(180deg, #7a4bd0, #4a2a8f); box-shadow: 0 7px 0 #2c1660, 0 14px 28px rgba(0,0,0,.5); }
   .btn.secondary:active { box-shadow: 0 2px 0 #2c1660, 0 8px 14px rgba(0,0,0,.5); }
-  .hint {
-    margin-top: 24px; font-size: clamp(13px, 3.3vw, 18px); color: #d8c6f5; line-height: 1.9; max-width: 580px;
-  }
+  .hint { margin-top: 24px; font-size: clamp(13px, 3.3vw, 18px); color: #d8c6f5; line-height: 1.9; max-width: 580px; }
   .hint b { color: #ff9a4d; }
   .score-big { font-size: clamp(26px, 7vw, 48px); font-weight: 900; color: #ffd23f; margin: 6px 0 2px; }
   .best { color: #c9a9ff; font-size: clamp(14px, 3.6vw, 20px); margin-bottom: 22px; }
-
-  .panel {
-    background: rgba(40,24,64,.66); border: 1px solid rgba(170,130,240,.32);
-    border-radius: 18px; padding: 14px 22px; width: min(450px, 88vw); margin-bottom: 18px;
-  }
-  .row {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 15px 4px; border-bottom: 1px solid rgba(170,130,240,.18);
-    font-size: clamp(16px, 4.4vw, 22px); font-weight: 700; color: #ecdfff;
-  }
+  .panel { background: rgba(40,24,64,.66); border: 1px solid rgba(170,130,240,.32); border-radius: 18px; padding: 14px 22px; width: min(450px, 88vw); margin-bottom: 18px; }
+  .row { display: flex; align-items: center; justify-content: space-between; padding: 15px 4px; border-bottom: 1px solid rgba(170,130,240,.18); font-size: clamp(16px, 4.4vw, 22px); font-weight: 700; color: #ecdfff; }
   .row:last-child { border-bottom: none; }
   .toggle { position: relative; width: 64px; height: 34px; border-radius: 20px; background: #4a3a66; transition: background .2s; cursor: pointer; flex: 0 0 auto; }
   .toggle.on { background: #ff9a1f; }
   .toggle::after { content: ""; position: absolute; top: 4px; right: 4px; width: 26px; height: 26px; border-radius: 50%; background: #fff; transition: transform .2s; }
   .toggle.on::after { transform: translateX(-30px); }
   .seg { display: flex; gap: 6px; }
-  .seg button {
-    font-family: inherit; font-size: clamp(13px,3.6vw,17px); font-weight: 800; color: #d8c6f5;
-    background: #3a2a58; border: 1px solid rgba(170,130,240,.3); border-radius: 10px; padding: 8px 14px; cursor: pointer;
-  }
+  .seg button { font-family: inherit; font-size: clamp(13px,3.6vw,17px); font-weight: 800; color: #d8c6f5; background: #3a2a58; border: 1px solid rgba(170,130,240,.3); border-radius: 10px; padding: 8px 14px; cursor: pointer; }
   .seg button.active { background: #ff9a1f; color: #1a0e22; border-color: #ff9a1f; }
-  .credit { position: absolute; bottom: 8px; left: 0; right: 0; text-align: center; font-size: 11px; color: rgba(220,200,255,.45); z-index: 11; }
+  .credit { position: absolute; bottom: 6px; left: 0; right: 0; text-align: center; font-size: 11px; color: rgba(220,200,255,.45); z-index: 11; }
 </style>
 </head>
 <body>
 <canvas id="game"></canvas>
 
-<!-- شاشة البداية -->
 <div id="startScreen" class="overlay">
   <div class="title">زحف الزومبي</div>
   <div class="subtitle">اركض، أطلق النار، وانجُ من القطيع 🧟</div>
@@ -91,7 +71,6 @@
   </div>
 </div>
 
-<!-- شاشة الإعدادات -->
 <div id="settingsScreen" class="overlay hidden">
   <div class="title" style="font-size:clamp(28px,7vw,56px);">الإعدادات</div>
   <div class="panel">
@@ -109,7 +88,6 @@
   <button id="settingsBackBtn" class="btn">↩ رجوع</button>
 </div>
 
-<!-- شاشة النهاية -->
 <div id="gameOverScreen" class="overlay hidden">
   <div class="title" style="color:#ff5252; text-shadow:0 0 18px rgba(255,70,70,.7),0 5px 0 #4a0808;">انتهت اللعبة</div>
   <div class="score-big">النتيجة: <span id="finalScore">0</span></div>
@@ -118,87 +96,54 @@
   <button id="menuBtn" class="btn secondary">🏠 القائمة الرئيسية</button>
 </div>
 
-<div class="credit">رسومات: ansimuz & Phaser examples (CC-BY) — مدمجة في اللعبة</div>
+<div class="credit">رسومات وأصوات: ansimuz & Phaser examples (CC-BY) — مدمجة في اللعبة</div>
 
 <script>
 (function () {
   "use strict";
 
   /* ============================================================
-     الصوت (Web Audio) — مؤثرات وموسيقى مولّدة برمجياً
+     الصوت — مؤثرات احترافية حقيقية (ملفات) + موسيقى خلفية
      ============================================================ */
   const Sound = {
-    ctx: null, master: null, musicGain: null, noiseBuf: null,
-    sfxOn: true, musicOn: true, music: { playing: false, timer: null, step: 0, nextTime: 0 },
+    ctx: null, master: null, buffers: {}, music: null, wantMusic: false,
+    sfxOn: true, musicOn: true,
     init() {
       if (this.ctx) return;
       const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
       this.ctx = new AC();
-      this.master = this.ctx.createGain(); this.master.gain.value = 0.55; this.master.connect(this.ctx.destination);
-      this.musicGain = this.ctx.createGain(); this.musicGain.gain.value = 0.0; this.musicGain.connect(this.master);
-      const len = this.ctx.sampleRate * 0.5; this.noiseBuf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
-      const d = this.noiseBuf.getChannelData(0); for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+      this.master = this.ctx.createGain(); this.master.gain.value = 0.9; this.master.connect(this.ctx.destination);
     },
-    resume() { if (this.ctx && this.ctx.state === "suspended") this.ctx.resume(); },
-    tone(dest, freq, t, dur, type, vol, slideTo) {
-      if (!this.ctx) return;
+    resume() {
+      if (this.ctx && this.ctx.state === "suspended") this.ctx.resume();
+      if (this.music && this.musicOn && this.wantMusic) this.music.play().catch(() => {});
+    },
+    loadSample(name, url) {
+      this.init(); if (!this.ctx) return Promise.resolve();
+      return fetch(url).then(r => r.arrayBuffer()).then(b => new Promise(res => {
+        this.ctx.decodeAudioData(b, buf => { this.buffers[name] = buf; res(); }, () => res());
+      })).catch(() => {});
+    },
+    loadMusic(url) { this.music = new Audio(url); this.music.loop = true; this.music.volume = 0.42; this.music.preload = "auto"; },
+    sample(name, vol) {
+      if (!this.sfxOn || !this.ctx || !this.buffers[name]) return;
+      const s = this.ctx.createBufferSource(); s.buffer = this.buffers[name];
+      const g = this.ctx.createGain(); g.gain.value = vol == null ? 1 : vol;
+      s.connect(g); g.connect(this.master); s.start();
+    },
+    growl(vol) { this.sample(Math.random() < 0.5 ? "growl1" : "growl2", vol); },
+    tone(freq, dur, type, vol, slideTo) {
+      if (!this.sfxOn || !this.ctx) return; const t = this.ctx.currentTime;
       const o = this.ctx.createOscillator(), g = this.ctx.createGain();
-      o.type = type || "square"; o.frequency.setValueAtTime(freq, t);
+      o.type = type; o.frequency.setValueAtTime(freq, t);
       if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
       g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.01);
       g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-      o.connect(g); g.connect(dest || this.master); o.start(t); o.stop(t + dur + 0.02);
+      o.connect(g); g.connect(this.master); o.start(t); o.stop(t + dur + 0.02);
     },
-    noise(t, dur, vol, hp, lp) {
-      if (!this.ctx) return;
-      const s = this.ctx.createBufferSource(); s.buffer = this.noiseBuf;
-      const g = this.ctx.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-      let node = s;
-      if (hp) { const f = this.ctx.createBiquadFilter(); f.type = "highpass"; f.frequency.value = hp; node.connect(f); node = f; }
-      if (lp) { const f = this.ctx.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = lp; node.connect(f); node = f; }
-      node.connect(g); g.connect(this.master); s.start(t); s.stop(t + dur + 0.02);
-    },
-    play(name) {
-      if (!this.sfxOn || !this.ctx) return; const t = this.ctx.currentTime;
-      switch (name) {
-        case "jump":  this.tone(this.master, 320, t, 0.18, "square", 0.25, 720); break;
-        case "jump2": this.tone(this.master, 480, t, 0.16, "square", 0.22, 900); break;
-        case "shoot": this.tone(this.master, 900, t, 0.06, "square", 0.16, 200); this.noise(t, 0.08, 0.28, 1200); break;
-        case "hit":   this.noise(t, 0.10, 0.30, 400, 2000); break;
-        case "kill":  this.tone(this.master, 220, t, 0.22, "sawtooth", 0.28, 70); this.noise(t, 0.18, 0.25, 200, 1500); break;
-        case "stomp": this.tone(this.master, 160, t, 0.16, "square", 0.3, 60); break;
-        case "hurt":  this.tone(this.master, 380, t, 0.35, "sawtooth", 0.32, 90); break;
-        case "over":  this.tone(this.master, 440, t, 0.18, "square", 0.3, 392); this.tone(this.master, 392, t+0.18, 0.18, "square", 0.3, 330); this.tone(this.master, 294, t+0.36, 0.45, "square", 0.3, 196); break;
-      }
-    },
-    startMusic() {
-      if (!this.ctx || this.music.playing) return;
-      this.music.playing = true; this.music.step = 0; this.music.nextTime = this.ctx.currentTime + 0.1;
-      this.musicGain.gain.cancelScheduledValues(this.ctx.currentTime);
-      this.musicGain.gain.linearRampToValueAtTime(this.musicOn ? 0.5 : 0.0, this.ctx.currentTime + 0.8);
-      const tick = () => {
-        if (!this.music.playing) return;
-        const ahead = this.ctx.currentTime + 0.15, spb = 60 / 140 / 2;
-        while (this.music.nextTime < ahead) { this.scheduleStep(this.music.step % 8, this.music.nextTime); this.music.step++; this.music.nextTime += spb; }
-        this.music.timer = setTimeout(tick, 25);
-      };
-      tick();
-    },
-    scheduleStep(step, t) {
-      const bass = [55, 55, 65.41, 55, 73.42, 55, 82.41, 65.41];
-      this.tone(this.musicGain, bass[step], t, 0.20, "triangle", 0.55);
-      this.noise(t, step % 2 === 0 ? 0.05 : 0.03, this.musicOn ? 0.05 : 0, 7000);
-      const lead = [0, 440, 0, 523.25, 0, 659.25, 587.33, 0];
-      if (lead[step]) this.tone(this.musicGain, lead[step], t, 0.14, "square", 0.16);
-    },
-    stopMusic() {
-      this.music.playing = false; if (this.music.timer) { clearTimeout(this.music.timer); this.music.timer = null; }
-      if (this.musicGain && this.ctx) { this.musicGain.gain.cancelScheduledValues(this.ctx.currentTime); this.musicGain.gain.linearRampToValueAtTime(0.0, this.ctx.currentTime + 0.3); }
-    },
-    setMusicEnabled(on) {
-      this.musicOn = on;
-      if (this.musicGain && this.ctx) { this.musicGain.gain.cancelScheduledValues(this.ctx.currentTime); this.musicGain.gain.linearRampToValueAtTime((on && this.music.playing) ? 0.5 : 0.0, this.ctx.currentTime + 0.3); }
-    },
+    startMusic() { this.wantMusic = true; if (this.music && this.musicOn) { try { this.music.currentTime = 0; } catch (e) {} this.music.play().catch(() => {}); } },
+    stopMusic() { this.wantMusic = false; if (this.music) this.music.pause(); },
+    setMusicEnabled(on) { this.musicOn = on; if (!this.music) return; if (on && this.wantMusic) this.music.play().catch(() => {}); else this.music.pause(); },
   };
 
   /* ============================================================
@@ -206,13 +151,12 @@
      ============================================================ */
   const canvas = document.getElementById("game");
   const ctx = canvas.getContext("2d");
-  const WORLD_W = 1280, WORLD_H = 720;
-  const GROUND_Y = 602;
-  let scale = 1, offsetX = 0, offsetY = 0, dpr = 1;
+  const WORLD_W = 1280, WORLD_H = 720, GROUND_Y = 596;
+  let scale = 1, offsetX = 0, offsetY = 0, dpr = 1, cssW = 0, cssH = 0;
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2.5);
-    const cssW = window.innerWidth, cssH = window.innerHeight;
+    cssW = window.innerWidth; cssH = window.innerHeight;
     canvas.style.width = cssW + "px"; canvas.style.height = cssH + "px";
     canvas.width = Math.floor(cssW * dpr); canvas.height = Math.floor(cssH * dpr);
     scale = Math.max(cssW / WORLD_W, cssH / WORLD_H);
@@ -223,47 +167,40 @@
   resize();
 
   /* ============================================================
-     تحميل الأصول (صور + atlas)
+     تحميل الأصول
      ============================================================ */
   const IMG = {}, ATLAS = {};
   let assetsReady = false;
-  function loadImg(name, src) {
-    return new Promise((res) => { const im = new Image(); im.onload = () => { IMG[name] = im; res(); }; im.onerror = () => { IMG[name] = null; res(); }; im.src = src; });
-  }
-  function loadAtlas(name, src) {
-    return fetch(src).then(r => r.json()).then(j => {
-      const m = {}; (j.textures ? j.textures[0].frames : j.frames).forEach(f => { m[f.filename] = f; }); ATLAS[name] = m;
-    }).catch(() => { ATLAS[name] = {}; });
-  }
-  Promise.all([
-    loadImg("far", "assets/bg-far.png"),
-    loadImg("back", "assets/bg-back.png"),
-    loadImg("fore", "assets/bg-fore.png"),
-    loadImg("soldier", "assets/soldier.png"),
-    loadImg("zombie", "assets/zombie.png"),
-    loadAtlas("soldier", "assets/soldier.json"),
-    loadAtlas("zombie", "assets/zombie.json"),
-  ]).then(() => {
-    assetsReady = true;
-    const b = document.getElementById("startBtn");
-    b.disabled = false; b.textContent = "▶ ابدأ اللعب";
-  });
+  function loadImg(name, src) { return new Promise(res => { const im = new Image(); im.onload = () => { IMG[name] = im; res(); }; im.onerror = () => { IMG[name] = null; res(); }; im.src = src; }); }
+  function loadAtlas(name, src) { return fetch(src).then(r => r.json()).then(j => { const m = {}; (j.textures ? j.textures[0].frames : j.frames).forEach(f => { m[f.filename] = f; }); ATLAS[name] = m; }).catch(() => { ATLAS[name] = {}; }); }
 
-  // تسلسلات الحركة
+  Sound.init();
+  Sound.loadMusic("assets/audio/music.m4a");
+  Promise.all([
+    loadImg("far", "assets/bg-far.png"), loadImg("back", "assets/bg-back.png"), loadImg("fore", "assets/bg-fore.png"),
+    loadImg("soldier", "assets/soldier.png"), loadImg("zombie", "assets/zombie.png"),
+    loadAtlas("soldier", "assets/soldier.json"), loadAtlas("zombie", "assets/zombie.json"),
+    Sound.loadSample("shoot", "assets/audio/shoot.wav"),
+    Sound.loadSample("hit", "assets/audio/hit.wav"),
+    Sound.loadSample("kill", "assets/audio/kill.wav"),
+    Sound.loadSample("growl1", "assets/audio/growl1.mp3"),
+    Sound.loadSample("growl2", "assets/audio/growl2.mp3"),
+    Sound.loadSample("gameover", "assets/audio/gameover.wav"),
+  ]).then(() => { assetsReady = true; const b = document.getElementById("startBtn"); b.disabled = false; b.textContent = "▶ ابدأ اللعب"; });
+
   const A_RUN = [1,2,3,4,5,6,7,8].map(n => "Soldier_2_walk_" + n);
   const A_SHOOT = [1,2,3,4,5,6,7,8].map(n => "Soldier_2_shot_front_" + n);
   const Z_WALK = [0,1,2,3,4,5,6,7,8].map(n => "walk_00" + n);
   const Z_DEATH = [0,1,2,3,4,5].map(n => "Death_00" + n);
+  const SOLDIER_SCALE = 1.42;
 
-  // رسم إطار من atlas (مع معالجة القص trim) عند نقطة قدم (cx, footY)
-  function drawFrame(img, atlas, name, cx, footY, targetH, faceLeft) {
-    const f = atlas && atlas[name];
-    if (!img || !f) return false;
-    const s = targetH / f.sourceSize.h;
-    const sw = f.sourceSize.w * s;
-    const lx = cx - sw / 2, ly = footY - targetH;
-    const dx = lx + f.spriteSourceSize.x * s, dy = ly + f.spriteSourceSize.y * s;
-    const dw = f.frame.w * s, dh = f.frame.h * s;
+  // رسم إطار atlas بمعامل تحجيم ثابت: قاع البكسل المرئي يستقر عند footY
+  function drawFrame(img, atlas, name, cx, footY, scl, faceLeft) {
+    const f = atlas && atlas[name]; if (!img || !f) return false;
+    const sw = f.sourceSize.w * scl;
+    const dw = f.frame.w * scl, dh = f.frame.h * scl;
+    const dx = (cx - sw / 2) + f.spriteSourceSize.x * scl;
+    const dy = footY - dh;
     ctx.save();
     if (faceLeft) { ctx.translate(cx, 0); ctx.scale(-1, 1); ctx.translate(-cx, 0); }
     ctx.drawImage(img, f.frame.x, f.frame.y, f.frame.w, f.frame.h, dx, dy, dw, dh);
@@ -272,25 +209,20 @@
   }
 
   /* ============================================================
-     حالة اللعبة والإعدادات
+     الحالة والإعدادات
      ============================================================ */
   const State = { MENU: 0, PLAY: 1, OVER: 2 };
   let state = State.MENU;
   const DIFF = { easy: { speed: 6.0, spawn: 120 }, normal: { speed: 7.0, spawn: 95 }, hard: { speed: 8.5, spawn: 75 } };
-  const settings = {
-    sfx: localStorage.getItem("zr_sfx") !== "0",
-    music: localStorage.getItem("zr_music") !== "0",
-    diff: localStorage.getItem("zr_diff") || "normal",
-  };
+  const settings = { sfx: localStorage.getItem("zr_sfx") !== "0", music: localStorage.getItem("zr_music") !== "0", diff: localStorage.getItem("zr_diff") || "normal" };
   Sound.sfxOn = settings.sfx; Sound.musicOn = settings.music;
   let best = parseInt(localStorage.getItem("zombieRunBest") || "0", 10);
 
   const game = { speed: 7, baseSpeed: 7, distance: 0, bgX: 0, score: 0, kills: 0, spawnTimer: 0, spawnGap: 95, platTimer: 0, shootCooldown: 0 };
-
   const MAX_HEARTS = 3, GRAVITY = 0.95, JUMP_V = -18, MAX_JUMPS = 2;
-  const player = { x: 320, y: GROUND_Y, w: 56, h: 116, vy: 0, onGround: true, jumps: 0, runFrame: 0, shootAnim: 0, muzzle: 0, hearts: MAX_HEARTS, invuln: 0 };
-
-  const zombies = [], bullets = [], particles = [], platforms = [];
+  const player = { x: 320, y: GROUND_Y, w: 56, h: 150, vy: 0, onGround: true, jumps: 0, runFrame: 0, shootAnim: 0, muzzle: 0, hearts: MAX_HEARTS, invuln: 0 };
+  const zombies = [], bullets = [], particles = [];
+  const platforms = [];
 
   function resetGame() {
     const d = DIFF[settings.diff] || DIFF.normal;
@@ -307,19 +239,18 @@
   function jump() {
     if (player.jumps < MAX_JUMPS) {
       player.vy = JUMP_V; player.onGround = false; player.jumps++;
-      Sound.play(player.jumps === 1 ? "jump" : "jump2");
+      Sound.tone(player.jumps === 1 ? 320 : 480, 0.17, "square", 0.22, player.jumps === 1 ? 720 : 900);
       for (let i = 0; i < 8; i++) particles.push({ x: player.x, y: player.y, vx: (Math.random()-0.5)*4, vy: Math.random()*3+1, life: 18, c: "#e8d9ff", r: 3 });
     }
   }
   function shoot() {
     if (game.shootCooldown > 0) return;
-    game.shootCooldown = 12; player.muzzle = 6; player.shootAnim = 16; Sound.play("shoot");
-    bullets.push({ x: player.x + player.w * 0.55, y: player.y - player.h * 0.52, vx: 20, r: 6 });
+    game.shootCooldown = 12; player.muzzle = 6; player.shootAnim = 16; Sound.sample("shoot", 0.5);
+    bullets.push({ x: player.x + player.w * 0.55, y: player.y - player.h * 0.55, vx: 20, r: 6 });
   }
   function handlePress(clientX) { if (state !== State.PLAY) return; if (clientX > window.innerWidth / 2) jump(); else shoot(); }
-
-  canvas.addEventListener("touchstart", (e) => { e.preventDefault(); Sound.init(); Sound.resume(); for (const t of e.changedTouches) handlePress(t.clientX); }, { passive: false });
-  canvas.addEventListener("mousedown", (e) => { e.preventDefault(); Sound.init(); Sound.resume(); handlePress(e.clientX); });
+  canvas.addEventListener("touchstart", (e) => { e.preventDefault(); Sound.resume(); for (const t of e.changedTouches) handlePress(t.clientX); }, { passive: false });
+  canvas.addEventListener("mousedown", (e) => { e.preventDefault(); Sound.resume(); handlePress(e.clientX); });
   window.addEventListener("keydown", (e) => {
     if (state !== State.PLAY) return;
     if (e.code === "Space" || e.code === "ArrowUp") { e.preventDefault(); jump(); }
@@ -330,8 +261,9 @@
      التوليد
      ============================================================ */
   function spawnZombie(x, y) {
-    const tall = Math.random() < 0.3; const h = tall ? 132 : 104;
-    zombies.push({ x, y, w: 50, h, hp: tall ? 2 : 1, hurt: 0, frame: Math.random()*Z_WALK.length, dying: 0, drawH: tall ? 188 : 150 });
+    const tall = Math.random() < 0.3;
+    zombies.push({ x, y, w: tall ? 80 : 70, h: tall ? 150 : 120, hp: tall ? 2 : 1, hurt: 0, frame: Math.random()*Z_WALK.length, dying: 0, scl: tall ? 0.8 : 0.62 });
+    if (Math.random() < 0.35) Sound.growl(0.22);
   }
   function spawnPlatform() {
     const tier = Math.random() < 0.6 ? 1 : 2;
@@ -347,16 +279,13 @@
   function update() {
     game.bgX += (state === State.PLAY ? game.speed : 1.6);
     if (state !== State.PLAY) return;
-
     game.baseSpeed += 0.0007; game.speed = game.baseSpeed;
-    game.distance += game.speed;
-    game.score = Math.floor(game.distance / 10) + game.kills * 25;
+    game.distance += game.speed; game.score = Math.floor(game.distance / 10) + game.kills * 25;
     if (game.shootCooldown > 0) game.shootCooldown--;
     if (player.muzzle > 0) player.muzzle--;
     if (player.shootAnim > 0) player.shootAnim--;
     if (player.invuln > 0) player.invuln--;
 
-    // فيزياء اللاعب + الهبوط على الأرض/المنصّات
     const prevFoot = player.y;
     player.vy += GRAVITY; player.y += player.vy;
     let support = (player.y >= GROUND_Y) ? GROUND_Y : null;
@@ -372,17 +301,12 @@
     else player.onGround = false;
     player.runFrame += game.speed * 0.05;
 
-    // توليد الزومبي
     game.spawnTimer++;
     const gap = Math.max(40, game.spawnGap - game.distance / 220);
-    if (game.spawnTimer >= gap) {
-      game.spawnTimer = 0; spawnZombie(WORLD_W + 60, GROUND_Y);
-      if (Math.random() < 0.2 && game.distance > 1500) spawnZombie(WORLD_W + 60 + 90, GROUND_Y);
-    }
+    if (game.spawnTimer >= gap) { game.spawnTimer = 0; spawnZombie(WORLD_W + 60, GROUND_Y); if (Math.random() < 0.2 && game.distance > 1500) spawnZombie(WORLD_W + 150, GROUND_Y); }
     game.platTimer++;
     if (game.platTimer >= 90 + Math.random() * 80) { game.platTimer = 0; spawnPlatform(); }
     for (let i = platforms.length - 1; i >= 0; i--) { platforms[i].x -= game.speed; if (platforms[i].x + platforms[i].w < -40) platforms.splice(i, 1); }
-
     for (let i = bullets.length - 1; i >= 0; i--) { bullets[i].x += bullets[i].vx; if (bullets[i].x > WORLD_W + 30) bullets.splice(i, 1); }
 
     for (let i = zombies.length - 1; i >= 0; i--) {
@@ -396,8 +320,8 @@
         const b = bullets[j];
         if (b.x + b.r > z.x - z.w/2 && b.x - b.r < z.x + z.w/2 && b.y > z.y - z.h && b.y < z.y) {
           bullets.splice(j, 1); z.hp--; z.hurt = 8; spawnBlood(b.x, b.y, 8, "#6fd06f");
-          if (z.hp <= 0) { z.dying = 1; game.kills++; spawnBlood(z.x, z.y - z.h/2, 16, "#6fd06f"); particles.push({ x: z.x, y: z.y - z.h, vx: 0, vy: -1.2, life: 44, text: "+25", c: "#ffd23f" }); Sound.play("kill"); }
-          else Sound.play("hit");
+          if (z.hp <= 0) { z.dying = 1; game.kills++; spawnBlood(z.x, z.y - z.h/2, 16, "#6fd06f"); particles.push({ x: z.x, y: z.y - z.h, vx: 0, vy: -1.2, life: 44, text: "+25", c: "#ffd23f" }); Sound.sample("kill", 0.7); if (Math.random()<0.5) Sound.growl(0.5); }
+          else Sound.sample("hit", 0.55);
           break;
         }
       }
@@ -407,15 +331,15 @@
       const zx1 = z.x - z.w/2 + 6, zx2 = z.x + z.w/2 - 6, zy1 = z.y - z.h, zy2 = z.y;
       if (px2 > zx1 && px1 < zx2 && py2 > zy1 && py1 < zy2) {
         if (player.vy > 4 && py2 - z.h * 0.5 < zy1 + 18) {
-          z.dying = 1; game.kills++; spawnBlood(z.x, z.y - z.h/2, 16, "#6fd06f"); Sound.play("stomp");
+          z.dying = 1; game.kills++; spawnBlood(z.x, z.y - z.h/2, 16, "#6fd06f"); Sound.sample("kill", 0.55);
           player.vy = JUMP_V * 0.7; player.jumps = 1; continue;
         } else if (player.invuln <= 0) {
-          player.hearts--; player.invuln = 70; Sound.play("hurt");
+          player.hearts--; player.invuln = 70; Sound.growl(0.9);
           spawnBlood(player.x, player.y - player.h*0.5, 18, "#ff4d4d"); player.vy = -9;
           if (player.hearts <= 0) { gameOver(); return; }
         }
       }
-      if (z.x < -80) zombies.splice(i, 1);
+      if (z.x < -90) zombies.splice(i, 1);
     }
 
     for (let i = particles.length - 1; i >= 0; i--) {
@@ -437,10 +361,10 @@
     ctx.imageSmoothingEnabled = false;
 
     drawSky();
-    drawLayer(IMG.far, 0.18, 430, GROUND_Y + 18);
-    drawLayer(IMG.back, 0.34, 470, GROUND_Y + 18);
+    drawLayer(IMG.far, 0.18, 430, GROUND_Y + 28);
+    drawLayer(IMG.back, 0.34, 470, GROUND_Y + 28);
     drawLayer(IMG.fore, 0.9, WORLD_H, WORLD_H);
-    drawGroundShade();
+    drawGround();
     drawPlatforms();
     drawParticles(false);
     drawBullets();
@@ -454,8 +378,7 @@
     const g = ctx.createLinearGradient(0, 0, 0, WORLD_H);
     g.addColorStop(0, "#241a3a"); g.addColorStop(0.45, "#3a2350"); g.addColorStop(0.8, "#7a3b56"); g.addColorStop(1, "#c96a4a");
     ctx.fillStyle = g; ctx.fillRect(0, 0, WORLD_W, WORLD_H);
-    ctx.fillStyle = "rgba(255,220,160,0.85)";
-    ctx.beginPath(); ctx.arc(WORLD_W * 0.7, 150, 60, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = "rgba(255,220,160,0.85)"; ctx.beginPath(); ctx.arc(WORLD_W * 0.7, 150, 60, 0, Math.PI*2); ctx.fill();
   }
   function drawLayer(img, speed, h, baseY) {
     if (!img) return;
@@ -463,55 +386,59 @@
     let off = (game.bgX * speed) % w; if (off < 0) off += w;
     for (let x = -off; x < WORLD_W + w; x += w) ctx.drawImage(img, x, baseY - h, w, h);
   }
-  function drawGroundShade() {
-    const g = ctx.createLinearGradient(0, GROUND_Y - 10, 0, WORLD_H);
-    g.addColorStop(0, "rgba(10,6,18,0)"); g.addColorStop(1, "rgba(10,6,18,0.55)");
-    ctx.fillStyle = g; ctx.fillRect(0, GROUND_Y - 10, WORLD_W, WORLD_H - GROUND_Y + 10);
+  function drawGround() {
+    const g = ctx.createLinearGradient(0, GROUND_Y, 0, WORLD_H);
+    g.addColorStop(0, "#34283f"); g.addColorStop(0.5, "#211826"); g.addColorStop(1, "#120c18");
+    ctx.fillStyle = g; ctx.fillRect(0, GROUND_Y, WORLD_W, WORLD_H - GROUND_Y);
+    // حافة نيون علوية
+    ctx.fillStyle = "#ff7a3d"; ctx.fillRect(0, GROUND_Y - 3, WORLD_W, 4);
+    ctx.fillStyle = "rgba(255,154,31,0.30)"; ctx.fillRect(0, GROUND_Y + 1, WORLD_W, 4);
+    // خطوط الطريق المتحركة
+    ctx.fillStyle = "rgba(255,205,130,0.55)";
+    const period = 150, off = game.bgX % period, y = GROUND_Y + (WORLD_H - GROUND_Y) * 0.46;
+    for (let x = -off; x < WORLD_W; x += period) ctx.fillRect(x, y, 78, 6);
+    // بقع إنارة على الأسفلت
+    ctx.fillStyle = "rgba(255,120,60,0.05)";
+    const p2 = 320, o2 = (game.bgX * 0.9) % p2;
+    for (let x = -o2; x < WORLD_W; x += p2) { ctx.beginPath(); ctx.ellipse(x + 100, WORLD_H - 30, 90, 18, 0, 0, Math.PI*2); ctx.fill(); }
   }
-  function drawShadow(cx, footY, r) {
-    ctx.fillStyle = "rgba(0,0,0,0.32)"; ctx.beginPath(); ctx.ellipse(cx, footY - 2, r, r * 0.26, 0, 0, Math.PI*2); ctx.fill();
-  }
+  function drawShadow(cx, footY, r) { ctx.fillStyle = "rgba(0,0,0,0.34)"; ctx.beginPath(); ctx.ellipse(cx, footY - 2, r, r * 0.26, 0, 0, Math.PI*2); ctx.fill(); }
   function drawPlatforms() {
     for (const pf of platforms) {
       ctx.fillStyle = "#241830"; roundRect(pf.x, pf.y, pf.w, pf.h, 6); ctx.fill();
       ctx.fillStyle = "#ff9a1f"; roundRect(pf.x, pf.y, pf.w, 7, 4); ctx.fill();
       ctx.fillStyle = "rgba(255,154,31,0.25)"; ctx.fillRect(pf.x, pf.y + 7, pf.w, 3);
-      ctx.fillStyle = "rgba(20,12,28,0.6)";
-      ctx.fillRect(pf.x + 16, pf.y + pf.h, 9, 26); ctx.fillRect(pf.x + pf.w - 25, pf.y + pf.h, 9, 26);
+      ctx.fillStyle = "rgba(20,12,28,0.6)"; ctx.fillRect(pf.x + 16, pf.y + pf.h, 9, 26); ctx.fillRect(pf.x + pf.w - 25, pf.y + pf.h, 9, 26);
     }
   }
   function drawPlayer() {
     drawShadow(player.x, player.y, 30);
     if (player.invuln > 0 && Math.floor(player.invuln / 5) % 2 === 0) return;
-    let name, list, idx;
+    let list, idx;
     if (player.shootAnim > 0) { list = A_SHOOT; idx = Math.floor((16 - player.shootAnim) / 16 * list.length); }
     else { list = A_RUN; idx = Math.floor(player.runFrame) % list.length; }
-    name = list[Math.min(idx, list.length - 1)];
-    const ok = drawFrame(IMG.soldier, ATLAS.soldier, name, player.x, player.y, player.h * 1.35, false);
+    const name = list[Math.min(idx, list.length - 1)];
+    const ok = drawFrame(IMG.soldier, ATLAS.soldier, name, player.x, player.y, SOLDIER_SCALE, false);
     if (!ok) { ctx.fillStyle = "#3a72d4"; ctx.fillRect(player.x - 20, player.y - player.h, 40, player.h); }
     if (player.muzzle > 0) {
       ctx.fillStyle = "#ffe27a"; ctx.shadowColor = "#ffae42"; ctx.shadowBlur = 16;
-      ctx.beginPath(); ctx.arc(player.x + player.w * 0.6, player.y - player.h * 0.52, 9 + Math.random()*4, 0, Math.PI*2); ctx.fill();
-      ctx.shadowBlur = 0;
+      ctx.beginPath(); ctx.arc(player.x + player.w * 0.62, player.y - player.h * 0.55, 9 + Math.random()*4, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0;
     }
   }
   function drawZombies() {
     for (const z of zombies) {
-      drawShadow(z.x, z.y, 26);
-      let name, list;
-      if (z.dying > 0) { list = Z_DEATH; const idx = Math.min(list.length - 1, Math.floor(z.dying / 36 * list.length)); name = list[idx]; }
-      else { list = Z_WALK; name = list[Math.floor(z.frame) % list.length]; }
-      if (z.hurt > 0) { ctx.save(); ctx.globalAlpha = 0.85; }
-      const ok = drawFrame(IMG.zombie, ATLAS.zombie, name, z.x, z.y, z.drawH, true);
+      drawShadow(z.x, z.y, z.w * 0.42);
+      let name;
+      if (z.dying > 0) { const idx = Math.min(Z_DEATH.length - 1, Math.floor(z.dying / 36 * Z_DEATH.length)); name = Z_DEATH[idx]; }
+      else name = Z_WALK[Math.floor(z.frame) % Z_WALK.length];
+      if (z.hurt > 0) { ctx.save(); ctx.globalAlpha = 0.8; }
+      const ok = drawFrame(IMG.zombie, ATLAS.zombie, name, z.x, z.y, z.scl, true);
       if (z.hurt > 0) ctx.restore();
       if (!ok) { ctx.fillStyle = "#4f9e63"; ctx.fillRect(z.x - 22, z.y - z.h, 44, z.h); }
     }
   }
   function drawBullets() {
-    for (const b of bullets) {
-      ctx.save(); ctx.fillStyle = "#ffe27a"; ctx.shadowColor = "#ffae42"; ctx.shadowBlur = 12;
-      ctx.beginPath(); ctx.ellipse(b.x, b.y, b.r + 5, b.r - 1, 0, 0, Math.PI*2); ctx.fill(); ctx.restore();
-    }
+    for (const b of bullets) { ctx.save(); ctx.fillStyle = "#ffe27a"; ctx.shadowColor = "#ffae42"; ctx.shadowBlur = 12; ctx.beginPath(); ctx.ellipse(b.x, b.y, b.r + 5, b.r - 1, 0, 0, Math.PI*2); ctx.fill(); ctx.restore(); }
   }
   function drawParticles(textPass) {
     for (const p of particles) {
@@ -520,24 +447,30 @@
       else { ctx.globalAlpha = Math.max(0, Math.min(1, p.life / 24)); ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(p.x, p.y, p.r || 3, 0, Math.PI*2); ctx.fill(); ctx.globalAlpha = 1; }
     }
   }
-  function drawHeart(x, y, s, filled) {
-    ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
-    ctx.beginPath(); ctx.moveTo(0, 3); ctx.bezierCurveTo(-5, -3, -10, 2, 0, 9); ctx.bezierCurveTo(10, 2, 5, -3, 0, 3); ctx.closePath();
-    ctx.fillStyle = filled ? "#ff3b5c" : "rgba(255,255,255,0.16)"; ctx.fill();
-    ctx.lineWidth = 1.2; ctx.strokeStyle = "rgba(0,0,0,0.45)"; ctx.stroke(); ctx.restore();
+  function heartPath(x, y, s) {
+    ctx.beginPath(); ctx.moveTo(x, y + 3*s);
+    ctx.bezierCurveTo(x - 5*s, y - 3*s, x - 10*s, y + 2*s, x, y + 9*s);
+    ctx.bezierCurveTo(x + 10*s, y + 2*s, x + 5*s, y - 3*s, x, y + 3*s); ctx.closePath();
   }
+  // HUD يُرسم بإحداثيات الشاشة (منطقة آمنة) فلا يُقصّ على أي حجم
   function drawHUD() {
-    for (let i = 0; i < MAX_HEARTS; i++) drawHeart(36 + i * 44, 42, 2.6, i < player.hearts);
-    ctx.textAlign = "right"; ctx.shadowColor = "rgba(0,0,0,0.7)"; ctx.shadowBlur = 6;
-    ctx.font = "bold 36px Arial"; ctx.fillStyle = "#fff"; ctx.fillText("النقاط: " + game.score, WORLD_W - 28, 50);
-    ctx.font = "bold 25px Arial"; ctx.fillStyle = "#ff9a4d"; ctx.fillText("🧟 " + game.kills, WORLD_W - 28, 88);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const pad = 18, top = 20;
+    for (let i = 0; i < MAX_HEARTS; i++) {
+      const x = pad + 14 + i * 34, y = top;
+      heartPath(x, y, 1.5);
+      ctx.fillStyle = i < player.hearts ? "#ff3b5c" : "rgba(255,255,255,0.16)"; ctx.fill();
+      ctx.lineWidth = 1.4; ctx.strokeStyle = "rgba(0,0,0,0.5)"; ctx.stroke();
+    }
+    ctx.textAlign = "right"; ctx.shadowColor = "rgba(0,0,0,0.75)"; ctx.shadowBlur = 6;
+    const fs = Math.max(22, Math.min(34, Math.round(cssH * 0.05)));
+    ctx.font = "bold " + fs + "px Arial"; ctx.fillStyle = "#ffffff";
+    ctx.fillText("النقاط: " + game.score, cssW - pad, top + fs * 0.55);
+    ctx.font = "bold " + Math.round(fs * 0.72) + "px Arial"; ctx.fillStyle = "#ff9a4d";
+    ctx.fillText("🧟 " + game.kills, cssW - pad, top + fs * 1.5);
     ctx.shadowBlur = 0; ctx.textAlign = "left";
   }
-  function roundRect(x, y, w, h, r) {
-    ctx.beginPath(); ctx.moveTo(x + r, y);
-    ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
-    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
-  }
+  function roundRect(x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
 
   /* ============================================================
      الشاشات والإعدادات
@@ -548,34 +481,19 @@
   const finalScoreEl = document.getElementById("finalScore");
   const bestScoreEl = document.getElementById("bestScore");
   function show(el) { [startScreen, settingsScreen, gameOverScreen].forEach(s => s.classList.add("hidden")); if (el) el.classList.remove("hidden"); }
-
-  function startGame() {
-    if (!assetsReady) return;
-    Sound.init(); Sound.resume(); resetGame();
-    state = State.PLAY; show(null); Sound.startMusic();
-  }
-  function gameOver() {
-    state = State.OVER; Sound.play("over"); Sound.stopMusic();
-    if (game.score > best) { best = game.score; localStorage.setItem("zombieRunBest", String(best)); }
-    finalScoreEl.textContent = game.score; bestScoreEl.textContent = best; show(gameOverScreen);
-  }
+  function startGame() { if (!assetsReady) return; Sound.resume(); resetGame(); state = State.PLAY; show(null); Sound.startMusic(); }
+  function gameOver() { state = State.OVER; Sound.sample("gameover", 0.9); Sound.stopMusic(); if (game.score > best) { best = game.score; localStorage.setItem("zombieRunBest", String(best)); } finalScoreEl.textContent = game.score; bestScoreEl.textContent = best; show(gameOverScreen); }
   function goMenu() { state = State.MENU; Sound.stopMusic(); show(startScreen); }
 
   document.getElementById("startBtn").addEventListener("click", startGame);
   document.getElementById("restartBtn").addEventListener("click", startGame);
   document.getElementById("menuBtn").addEventListener("click", goMenu);
-  document.getElementById("settingsBtn").addEventListener("click", () => { Sound.init(); show(settingsScreen); });
+  document.getElementById("settingsBtn").addEventListener("click", () => { Sound.resume(); show(settingsScreen); });
   document.getElementById("settingsBackBtn").addEventListener("click", () => show(startScreen));
 
-  const sfxToggle = document.getElementById("sfxToggle");
-  const musicToggle = document.getElementById("musicToggle");
-  const diffSeg = document.getElementById("diffSeg");
-  function syncSettingsUI() {
-    sfxToggle.classList.toggle("on", settings.sfx);
-    musicToggle.classList.toggle("on", settings.music);
-    diffSeg.querySelectorAll("button").forEach(b => b.classList.toggle("active", b.dataset.diff === settings.diff));
-  }
-  sfxToggle.addEventListener("click", () => { settings.sfx = !settings.sfx; Sound.sfxOn = settings.sfx; localStorage.setItem("zr_sfx", settings.sfx ? "1" : "0"); syncSettingsUI(); if (settings.sfx) Sound.play("shoot"); });
+  const sfxToggle = document.getElementById("sfxToggle"), musicToggle = document.getElementById("musicToggle"), diffSeg = document.getElementById("diffSeg");
+  function syncSettingsUI() { sfxToggle.classList.toggle("on", settings.sfx); musicToggle.classList.toggle("on", settings.music); diffSeg.querySelectorAll("button").forEach(b => b.classList.toggle("active", b.dataset.diff === settings.diff)); }
+  sfxToggle.addEventListener("click", () => { settings.sfx = !settings.sfx; Sound.sfxOn = settings.sfx; localStorage.setItem("zr_sfx", settings.sfx ? "1" : "0"); syncSettingsUI(); if (settings.sfx) Sound.sample("shoot", 0.5); });
   musicToggle.addEventListener("click", () => { settings.music = !settings.music; localStorage.setItem("zr_music", settings.music ? "1" : "0"); Sound.setMusicEnabled(settings.music); syncSettingsUI(); });
   diffSeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => { settings.diff = b.dataset.diff; localStorage.setItem("zr_diff", settings.diff); syncSettingsUI(); }));
   syncSettingsUI();
