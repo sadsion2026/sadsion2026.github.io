@@ -21,30 +21,64 @@
     position: absolute; inset: 0; display: flex; flex-direction: column;
     align-items: center; justify-content: center; text-align: center;
     color: #e8eefc; z-index: 10; padding: env(safe-area-inset-top) 6vw env(safe-area-inset-bottom);
-    background: radial-gradient(circle at 50% 35%, rgba(40,60,110,.55), rgba(8,11,20,.92) 70%);
+    background: radial-gradient(circle at 50% 35%, rgba(40,60,110,.55), rgba(8,11,20,.93) 70%);
     backdrop-filter: blur(2px);
   }
   .overlay.hidden { display: none; }
   .title {
-    font-size: clamp(34px, 9vw, 78px); font-weight: 900; letter-spacing: 1px;
+    font-size: clamp(34px, 9vw, 80px); font-weight: 900; letter-spacing: 1px;
     color: #8effc1; text-shadow: 0 0 22px rgba(80,255,170,.55), 0 4px 0 #06351f;
     margin-bottom: 8px; line-height: 1.05;
   }
   .subtitle { font-size: clamp(14px, 3.6vw, 22px); color: #9fb2d8; margin-bottom: 26px; }
   .btn {
-    font-size: clamp(20px, 5.2vw, 30px); font-weight: 800; color: #062417;
+    font-size: clamp(19px, 5vw, 28px); font-weight: 800; color: #062417;
     background: linear-gradient(180deg, #9bffcb, #34d98a);
-    border: none; border-radius: 18px; padding: 16px 44px; cursor: pointer;
-    box-shadow: 0 8px 0 #1c8a55, 0 14px 26px rgba(0,0,0,.4); transition: transform .06s, box-shadow .06s;
+    border: none; border-radius: 16px; padding: 15px 42px; cursor: pointer; margin: 8px 0;
+    box-shadow: 0 7px 0 #1c8a55, 0 14px 26px rgba(0,0,0,.4); transition: transform .06s, box-shadow .06s;
+    min-width: 230px;
   }
-  .btn:active { transform: translateY(5px); box-shadow: 0 3px 0 #1c8a55, 0 8px 14px rgba(0,0,0,.4); }
+  .btn:active { transform: translateY(5px); box-shadow: 0 2px 0 #1c8a55, 0 8px 14px rgba(0,0,0,.4); }
+  .btn.secondary {
+    color: #e8eefc; background: linear-gradient(180deg, #4a5d8f, #2c3a63);
+    box-shadow: 0 7px 0 #1a2b44, 0 14px 26px rgba(0,0,0,.4);
+  }
   .hint {
-    margin-top: 26px; font-size: clamp(13px, 3.3vw, 18px); color: #c7d4f0;
+    margin-top: 24px; font-size: clamp(13px, 3.3vw, 18px); color: #c7d4f0;
     line-height: 1.9; max-width: 560px;
   }
   .hint b { color: #8effc1; }
   .score-big { font-size: clamp(26px, 7vw, 48px); font-weight: 900; color: #ffd86b; margin: 6px 0 2px; }
   .best { color: #9fb2d8; font-size: clamp(14px, 3.6vw, 20px); margin-bottom: 22px; }
+
+  /* لوحة الإعدادات */
+  .panel {
+    background: rgba(18,26,48,.72); border: 1px solid rgba(120,150,210,.3);
+    border-radius: 18px; padding: 18px 22px; width: min(440px, 86vw); margin-bottom: 18px;
+  }
+  .row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 4px; border-bottom: 1px solid rgba(120,150,210,.18);
+    font-size: clamp(16px, 4.4vw, 22px); font-weight: 700; color: #dce6ff;
+  }
+  .row:last-child { border-bottom: none; }
+  .toggle {
+    position: relative; width: 64px; height: 34px; border-radius: 20px;
+    background: #46506e; transition: background .2s; cursor: pointer; flex: 0 0 auto;
+  }
+  .toggle.on { background: #34d98a; }
+  .toggle::after {
+    content: ""; position: absolute; top: 4px; right: 4px; width: 26px; height: 26px;
+    border-radius: 50%; background: #fff; transition: transform .2s;
+  }
+  .toggle.on::after { transform: translateX(-30px); }
+  .seg { display: flex; gap: 6px; }
+  .seg button {
+    font-family: inherit; font-size: clamp(13px,3.6vw,17px); font-weight: 800;
+    color: #c7d4f0; background: #2c3858; border: 1px solid rgba(120,150,210,.3);
+    border-radius: 10px; padding: 8px 14px; cursor: pointer;
+  }
+  .seg button.active { background: #34d98a; color: #062417; border-color: #34d98a; }
 </style>
 </head>
 <body>
@@ -54,13 +88,38 @@
 <div id="startScreen" class="overlay">
   <div class="title">ركض الزومبي</div>
   <div class="subtitle">اركض بلا نهاية وقاتل الزومبي 🧟</div>
-  <button id="startBtn" class="btn">ابدأ اللعب</button>
+  <button id="startBtn" class="btn">▶ ابدأ اللعب</button>
+  <button id="settingsBtn" class="btn secondary">⚙️ الإعدادات</button>
   <div class="hint">
     اللاعب يركض <b>تلقائياً</b> — وأنت تتحكم بالباقي:<br>
-    👆 المس <b>يمين الشاشة</b> للقفز<br>
+    👆 المس <b>يمين الشاشة</b> للقفز (قفزة مزدوجة فوق المنصّات)<br>
     👆 المس <b>يسار الشاشة</b> لإطلاق النار 🔫<br>
-    اقفز فوق الزومبي أو أطلق عليه. لا تصطدم به!
+    اقفز على المنصّات، ادهس الزومبي أو أطلق عليه. لديك ❤️❤️❤️
   </div>
+</div>
+
+<!-- شاشة الإعدادات -->
+<div id="settingsScreen" class="overlay hidden">
+  <div class="title" style="font-size:clamp(28px,7vw,56px);">الإعدادات</div>
+  <div class="panel">
+    <div class="row">
+      <span>🔊 المؤثرات الصوتية</span>
+      <div id="sfxToggle" class="toggle on"></div>
+    </div>
+    <div class="row">
+      <span>🎵 الموسيقى</span>
+      <div id="musicToggle" class="toggle on"></div>
+    </div>
+    <div class="row">
+      <span>🎮 الصعوبة</span>
+      <div id="diffSeg" class="seg">
+        <button data-diff="easy">سهل</button>
+        <button data-diff="normal">عادي</button>
+        <button data-diff="hard">صعب</button>
+      </div>
+    </div>
+  </div>
+  <button id="settingsBackBtn" class="btn">↩ رجوع</button>
 </div>
 
 <!-- شاشة النهاية -->
@@ -68,33 +127,153 @@
   <div class="title" style="color:#ff7b7b; text-shadow:0 0 22px rgba(255,90,90,.5),0 4px 0 #4a0d0d;">انتهت اللعبة</div>
   <div class="score-big">النتيجة: <span id="finalScore">0</span></div>
   <div class="best">أفضل نتيجة: <span id="bestScore">0</span></div>
-  <button id="restartBtn" class="btn">العب مرة أخرى</button>
-  <div class="hint">يمين = قفز · يسار = إطلاق نار</div>
+  <button id="restartBtn" class="btn">↻ العب مرة أخرى</button>
+  <button id="menuBtn" class="btn secondary">🏠 القائمة الرئيسية</button>
 </div>
 
 <script>
 (function () {
   "use strict";
 
+  /* ============================================================
+     إدارة الصوت (Web Audio API) — مؤثرات وموسيقى مولّدة برمجياً
+     ============================================================ */
+  const Sound = {
+    ctx: null, master: null, musicGain: null, noiseBuf: null,
+    sfxOn: true, musicOn: true,
+    music: { playing: false, timer: null, step: 0, nextTime: 0 },
+
+    init() {
+      if (this.ctx) return;
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      this.ctx = new AC();
+      this.master = this.ctx.createGain();
+      this.master.gain.value = 0.55;
+      this.master.connect(this.ctx.destination);
+      this.musicGain = this.ctx.createGain();
+      this.musicGain.gain.value = 0.0;
+      this.musicGain.connect(this.master);
+      // مخزن ضوضاء بيضاء لإعادة الاستخدام (إطلاق نار، إصابة، هاي-هات)
+      const len = this.ctx.sampleRate * 0.5;
+      this.noiseBuf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
+      const d = this.noiseBuf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    },
+    resume() { if (this.ctx && this.ctx.state === "suspended") this.ctx.resume(); },
+
+    tone(dest, freq, t, dur, type, vol, slideTo) {
+      if (!this.ctx) return;
+      const o = this.ctx.createOscillator();
+      const g = this.ctx.createGain();
+      o.type = type || "square";
+      o.frequency.setValueAtTime(freq, t);
+      if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(vol, t + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g); g.connect(dest || this.master);
+      o.start(t); o.stop(t + dur + 0.02);
+    },
+    noise(t, dur, vol, hp, lp) {
+      if (!this.ctx) return;
+      const s = this.ctx.createBufferSource();
+      s.buffer = this.noiseBuf;
+      const g = this.ctx.createGain();
+      g.gain.setValueAtTime(vol, t);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      let node = s;
+      if (hp) { const f = this.ctx.createBiquadFilter(); f.type = "highpass"; f.frequency.value = hp; node.connect(f); node = f; }
+      if (lp) { const f = this.ctx.createBiquadFilter(); f.type = "lowpass"; f.frequency.value = lp; node.connect(f); node = f; }
+      node.connect(g); g.connect(this.master);
+      s.start(t); s.stop(t + dur + 0.02);
+    },
+
+    play(name) {
+      if (!this.sfxOn || !this.ctx) return;
+      const t = this.ctx.currentTime;
+      switch (name) {
+        case "jump":  this.tone(this.master, 320, t, 0.18, "square", 0.25, 720); break;
+        case "jump2": this.tone(this.master, 480, t, 0.16, "square", 0.22, 900); break;
+        case "shoot": this.tone(this.master, 900, t, 0.07, "square", 0.18, 200);
+                      this.noise(t, 0.08, 0.25, 1200); break;
+        case "hit":   this.noise(t, 0.10, 0.30, 400, 2000); break;
+        case "kill":  this.tone(this.master, 220, t, 0.22, "sawtooth", 0.28, 70);
+                      this.noise(t, 0.18, 0.25, 200, 1500); break;
+        case "stomp": this.tone(this.master, 160, t, 0.16, "square", 0.3, 60); break;
+        case "hurt":  this.tone(this.master, 380, t, 0.35, "sawtooth", 0.32, 90); break;
+        case "over":  this.tone(this.master, 440, t, 0.18, "square", 0.3, 392);
+                      this.tone(this.master, 392, t + 0.18, 0.18, "square", 0.3, 330);
+                      this.tone(this.master, 294, t + 0.36, 0.45, "square", 0.3, 196); break;
+      }
+    },
+
+    startMusic() {
+      if (!this.ctx || this.music.playing) return;
+      this.music.playing = true;
+      this.music.step = 0;
+      this.music.nextTime = this.ctx.currentTime + 0.1;
+      const target = this.musicOn ? 0.5 : 0.0;
+      this.musicGain.gain.cancelScheduledValues(this.ctx.currentTime);
+      this.musicGain.gain.linearRampToValueAtTime(target, this.ctx.currentTime + 0.8);
+      const tick = () => {
+        if (!this.music.playing) return;
+        const ahead = this.ctx.currentTime + 0.15;
+        const spb = 60 / 140 / 2; // مدة الإيقاع (نغمة 1/8 عند 140 bpm)
+        while (this.music.nextTime < ahead) {
+          this.scheduleStep(this.music.step % 8, this.music.nextTime);
+          this.music.step++;
+          this.music.nextTime += spb;
+        }
+        this.music.timer = setTimeout(tick, 25);
+      };
+      tick();
+    },
+    scheduleStep(step, t) {
+      // باس متوتر بمقام صغير + هاي-هات + لحن قصير — يعطي إحساس الأكشن
+      const bass = [55, 55, 65.41, 55, 73.42, 55, 82.41, 65.41]; // A C D A E C
+      this.tone(this.musicGain, bass[step], t, 0.20, "triangle", 0.55);
+      this.noise(t, step % 2 === 0 ? 0.05 : 0.03, this.musicOn ? 0.05 : 0, 7000);
+      const lead = [0, 440, 0, 523.25, 0, 659.25, 587.33, 0];
+      if (lead[step]) this.tone(this.musicGain, lead[step], t, 0.14, "square", 0.16);
+    },
+    stopMusic() {
+      this.music.playing = false;
+      if (this.music.timer) { clearTimeout(this.music.timer); this.music.timer = null; }
+      if (this.musicGain && this.ctx) {
+        this.musicGain.gain.cancelScheduledValues(this.ctx.currentTime);
+        this.musicGain.gain.linearRampToValueAtTime(0.0, this.ctx.currentTime + 0.3);
+      }
+    },
+    setMusicEnabled(on) {
+      this.musicOn = on;
+      if (this.musicGain && this.ctx) {
+        this.musicGain.gain.cancelScheduledValues(this.ctx.currentTime);
+        this.musicGain.gain.linearRampToValueAtTime(
+          (on && this.music.playing) ? 0.5 : 0.0, this.ctx.currentTime + 0.3);
+      }
+    },
+  };
+
+  /* ============================================================
+     الإعداد العام والرسم المتجاوب
+     ============================================================ */
   const canvas = document.getElementById("game");
   const ctx = canvas.getContext("2d");
 
-  // ===== أبعاد متجاوبة (Responsive) =====
-  // نصمم اللعبة في عالم افتراضي ثابت ونحوّله ليملأ الشاشة بأي حجم/نسبة.
-  const WORLD_W = 960;   // عرض العالم الافتراضي
-  const WORLD_H = 540;   // ارتفاع العالم الافتراضي
+  // عالم افتراضي أوسع (كاميرا أبعد) لرؤية مجال واسع والتخطيط
+  const WORLD_W = 1280;
+  const WORLD_H = 720;
   let scale = 1, offsetX = 0, offsetY = 0, dpr = 1;
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2.5);
-    const cssW = window.innerWidth;
-    const cssH = window.innerHeight;
+    const cssW = window.innerWidth, cssH = window.innerHeight;
     canvas.style.width = cssW + "px";
     canvas.style.height = cssH + "px";
     canvas.width = Math.floor(cssW * dpr);
     canvas.height = Math.floor(cssH * dpr);
-
-    // نستخدم "تغطية" (cover): نكبّر للأكبر حتى يملأ الشاشة بالكامل
+    // تغطية كاملة للشاشة بأي حجم/نسبة
     scale = Math.max(cssW / WORLD_W, cssH / WORLD_H);
     offsetX = (cssW - WORLD_W * scale) / 2;
     offsetY = (cssH - WORLD_H * scale) / 2;
@@ -103,215 +282,249 @@
   window.addEventListener("orientationchange", () => setTimeout(resize, 200));
   resize();
 
-  // تحويل إحداثيات اللمس/النقر إلى إحداثيات العالم
-  function toWorld(clientX, clientY) {
-    return {
-      x: (clientX - offsetX) / scale,
-      y: (clientY - offsetY) / scale,
-    };
-  }
-
-  // ===== حالة اللعبة =====
-  const GROUND_Y = WORLD_H - 90; // مستوى الأرض
+  /* ============================================================
+     حالة اللعبة والإعدادات
+     ============================================================ */
+  const GROUND_Y = WORLD_H - 130;
   const State = { MENU: 0, PLAY: 1, OVER: 2 };
   let state = State.MENU;
+
+  const DIFF = {
+    easy:   { speed: 6.0, spawn: 120, label: "easy" },
+    normal: { speed: 7.0, spawn: 95,  label: "normal" },
+    hard:   { speed: 8.5, spawn: 75,  label: "hard" },
+  };
+
+  const settings = {
+    sfx: localStorage.getItem("zr_sfx") !== "0",
+    music: localStorage.getItem("zr_music") !== "0",
+    diff: localStorage.getItem("zr_diff") || "normal",
+  };
+  Sound.sfxOn = settings.sfx;
+  Sound.musicOn = settings.music;
 
   let best = parseInt(localStorage.getItem("zombieRunBest") || "0", 10);
 
   const game = {
-    speed: 6,
-    baseSpeed: 6,
-    distance: 0,
-    score: 0,
-    kills: 0,
-    spawnTimer: 0,
-    spawnGap: 95,
-    shootCooldown: 0,
-    time: 0,
+    speed: 7, baseSpeed: 7, distance: 0, score: 0, kills: 0,
+    spawnTimer: 0, spawnGap: 95, platTimer: 0, shootCooldown: 0, time: 0,
   };
 
-  // ===== اللاعب =====
+  const MAX_HEARTS = 3;
+  const GRAVITY = 0.95;
+  const JUMP_V = -18;
+  const MAX_JUMPS = 2;
+
   const player = {
-    x: 180, y: GROUND_Y, w: 46, h: 70,
-    vy: 0, onGround: true, jumps: 0,
-    runFrame: 0, muzzle: 0,
+    x: 290, y: GROUND_Y, w: 48, h: 74,
+    vy: 0, onGround: true, jumps: 0, runFrame: 0, muzzle: 0,
+    hearts: MAX_HEARTS, invuln: 0,
   };
-  const GRAVITY = 0.9;
-  const JUMP_V = -16.5;
-  const MAX_JUMPS = 2; // قفزة مزدوجة
 
-  const zombies = [];   // الأعداء
-  const bullets = [];   // الرصاص
-  const particles = []; // مؤثرات (دم/شرر)
-  const clouds = [];    // غيوم خلفية
-  const bgBuildings = []; // مبانٍ خلفية
+  const zombies = [];
+  const bullets = [];
+  const particles = [];
+  const platforms = [];
+  const clouds = [];
+  const bgBuildings = [];
 
-  // غيوم ومباني للخلفية (بارالاكس)
-  for (let i = 0; i < 6; i++) {
-    clouds.push({ x: Math.random() * WORLD_W, y: 40 + Math.random() * 140, s: 0.4 + Math.random() * 0.5, r: 30 + Math.random() * 40 });
-  }
-  for (let i = 0; i < 10; i++) {
-    bgBuildings.push({ x: i * 130 + Math.random() * 40, w: 70 + Math.random() * 60, h: 120 + Math.random() * 160 });
-  }
+  for (let i = 0; i < 7; i++)
+    clouds.push({ x: Math.random() * WORLD_W, y: 50 + Math.random() * 180, s: 0.4 + Math.random() * 0.5, r: 34 + Math.random() * 46 });
+  for (let i = 0; i < 12; i++)
+    bgBuildings.push({ x: i * 150 + Math.random() * 40, w: 80 + Math.random() * 70, h: 150 + Math.random() * 200 });
 
   function resetGame() {
-    game.speed = game.baseSpeed = 6;
+    const d = DIFF[settings.diff] || DIFF.normal;
+    game.speed = game.baseSpeed = d.speed;
+    game.spawnGap = d.spawn;
     game.distance = 0; game.score = 0; game.kills = 0;
-    game.spawnTimer = 0; game.spawnGap = 95; game.shootCooldown = 0; game.time = 0;
+    game.spawnTimer = 0; game.platTimer = 0; game.shootCooldown = 0; game.time = 0;
     player.y = GROUND_Y; player.vy = 0; player.onGround = true; player.jumps = 0;
-    zombies.length = 0; bullets.length = 0; particles.length = 0;
+    player.hearts = MAX_HEARTS; player.invuln = 0; player.muzzle = 0;
+    zombies.length = 0; bullets.length = 0; particles.length = 0; platforms.length = 0;
   }
 
-  // ===== التحكم =====
+  /* ============================================================
+     التحكم
+     ============================================================ */
   function jump() {
     if (player.jumps < MAX_JUMPS) {
       player.vy = JUMP_V;
       player.onGround = false;
       player.jumps++;
-      for (let i = 0; i < 8; i++) {
+      Sound.play(player.jumps === 1 ? "jump" : "jump2");
+      for (let i = 0; i < 8; i++)
         particles.push({ x: player.x, y: player.y, vx: (Math.random()-0.5)*4, vy: Math.random()*3+1, life: 18, c: "#cfe", r: 3 });
-      }
     }
   }
-
   function shoot() {
     if (game.shootCooldown > 0) return;
-    game.shootCooldown = 12;
+    game.shootCooldown = 11;
     player.muzzle = 6;
-    bullets.push({ x: player.x + player.w/2, y: player.y - player.h*0.55, vx: 16, r: 6 });
+    Sound.play("shoot");
+    bullets.push({ x: player.x + player.w/2, y: player.y - player.h*0.55, vx: 19, r: 6 });
   }
-
   function handlePress(clientX) {
     if (state !== State.PLAY) return;
-    // النصف الأيمن من الشاشة = قفز ، النصف الأيسر = إطلاق نار
-    if (clientX > window.innerWidth / 2) jump();
-    else shoot();
+    if (clientX > window.innerWidth / 2) jump();   // يمين = قفز
+    else shoot();                                  // يسار = إطلاق نار
   }
 
-  // أحداث اللمس واللوحة
   canvas.addEventListener("touchstart", (e) => {
     e.preventDefault();
+    Sound.init(); Sound.resume();
     for (const t of e.changedTouches) handlePress(t.clientX);
   }, { passive: false });
-
   canvas.addEventListener("mousedown", (e) => {
     e.preventDefault();
+    Sound.init(); Sound.resume();
     handlePress(e.clientX);
   });
-
   window.addEventListener("keydown", (e) => {
     if (state !== State.PLAY) return;
     if (e.code === "Space" || e.code === "ArrowUp") { e.preventDefault(); jump(); }
     if (e.code === "ArrowDown" || e.code === "KeyF" || e.code === "Enter") { e.preventDefault(); shoot(); }
   });
 
-  // ===== أعداء =====
-  function spawnZombie() {
+  /* ============================================================
+     التوليد (زومبي / منصّات)
+     ============================================================ */
+  function spawnZombie(x, y) {
     const tall = Math.random() < 0.35;
-    const h = tall ? 86 : 64;
-    const w = 44;
-    zombies.push({
-      x: WORLD_W + 40, y: GROUND_Y, w, h,
-      hp: tall ? 2 : 1, hurt: 0, wob: Math.random() * Math.PI * 2,
-    });
+    const h = tall ? 90 : 66;
+    zombies.push({ x: x, y: y, w: 46, h: h, hp: tall ? 2 : 1, hurt: 0, wob: Math.random()*Math.PI*2 });
+  }
+  function spawnPlatform() {
+    const tier = Math.random() < 0.6 ? 1 : 2;       // طبقة مرتفعة أو أعلى
+    const y = GROUND_Y - (tier === 1 ? 165 : 300);  // 1: قفزة مفردة، 2: تحتاج قفزة مزدوجة
+    const w = 170 + Math.random() * 150;
+    platforms.push({ x: WORLD_W + 60, y: y, w: w, h: 22 });
+    // أحياناً زومبي يقف على المنصّة
+    if (Math.random() < 0.4)
+      spawnZombie(WORLD_W + 60 + w * (0.3 + Math.random()*0.4), y);
   }
 
-  // ===== الحلقة الرئيسية =====
+  /* ============================================================
+     التحديث
+     ============================================================ */
   function update() {
     game.time++;
-
-    // خلفية متحركة
     for (const c of clouds) {
       c.x -= c.s * game.speed * 0.25;
-      if (c.x < -80) { c.x = WORLD_W + 80; c.y = 40 + Math.random() * 140; }
+      if (c.x < -90) { c.x = WORLD_W + 90; c.y = 50 + Math.random()*180; }
     }
     for (const b of bgBuildings) {
       b.x -= game.speed * 0.4;
-      if (b.x + b.w < -20) { b.x = WORLD_W + 20; b.h = 120 + Math.random() * 160; }
+      if (b.x + b.w < -20) { b.x = WORLD_W + 20; b.h = 150 + Math.random()*200; }
     }
-
     if (state !== State.PLAY) return;
 
-    // تسارع تدريجي للصعوبة
-    game.baseSpeed = 6 + game.distance / 900;
+    game.baseSpeed += 0.0007;
     game.speed = game.baseSpeed;
     game.distance += game.speed;
     game.score = Math.floor(game.distance / 10) + game.kills * 25;
 
     if (game.shootCooldown > 0) game.shootCooldown--;
     if (player.muzzle > 0) player.muzzle--;
+    if (player.invuln > 0) player.invuln--;
 
-    // فيزياء اللاعب
+    // فيزياء اللاعب مع الهبوط على الأرض أو المنصّات
+    const prevFoot = player.y;
     player.vy += GRAVITY;
     player.y += player.vy;
-    if (player.y >= GROUND_Y) {
-      player.y = GROUND_Y; player.vy = 0; player.onGround = true; player.jumps = 0;
+    let support = (player.y >= GROUND_Y) ? GROUND_Y : null;
+    if (player.vy >= 0) {
+      const fh = player.w * 0.4;
+      for (const pf of platforms) {
+        if (player.x + fh > pf.x && player.x - fh < pf.x + pf.w &&
+            prevFoot <= pf.y + 8 && player.y >= pf.y) {
+          if (support === null || pf.y < support) support = pf.y;
+        }
+      }
+    }
+    if (support !== null) {
+      player.y = support; player.vy = 0; player.onGround = true; player.jumps = 0;
+    } else {
+      player.onGround = false;
     }
     player.runFrame += game.speed * 0.06;
 
-    // توليد الزومبي
+    // توليد الزومبي الأرضي
     game.spawnTimer++;
-    const gap = Math.max(45, game.spawnGap - game.distance / 200);
+    const gap = Math.max(42, game.spawnGap - game.distance / 220);
     if (game.spawnTimer >= gap) {
       game.spawnTimer = 0;
-      spawnZombie();
-      if (Math.random() < 0.18 && game.distance > 1500) {
-        // أحياناً يأتي زومبي ثانٍ قريب لزيادة الصعوبة
-        zombies.push({ x: WORLD_W + 40 + 70, y: GROUND_Y, w: 44, h: 64, hp: 1, hurt: 0, wob: Math.random()*6 });
-      }
+      spawnZombie(WORLD_W + 50, GROUND_Y);
+      if (Math.random() < 0.2 && game.distance > 1500)
+        spawnZombie(WORLD_W + 50 + 80, GROUND_Y);
+    }
+    // توليد المنصّات
+    game.platTimer++;
+    if (game.platTimer >= 90 + Math.random() * 80) {
+      game.platTimer = 0;
+      spawnPlatform();
+    }
+    // تحريك المنصّات
+    for (let i = platforms.length - 1; i >= 0; i--) {
+      platforms[i].x -= game.speed;
+      if (platforms[i].x + platforms[i].w < -40) platforms.splice(i, 1);
     }
 
-    // تحريك الرصاص
+    // الرصاص
     for (let i = bullets.length - 1; i >= 0; i--) {
-      const b = bullets[i];
-      b.x += b.vx;
-      if (b.x > WORLD_W + 30) bullets.splice(i, 1);
+      bullets[i].x += bullets[i].vx;
+      if (bullets[i].x > WORLD_W + 30) bullets.splice(i, 1);
     }
 
-    // تحريك الزومبي + تصادمات
+    // الزومبي + التصادمات
     for (let i = zombies.length - 1; i >= 0; i--) {
       const z = zombies[i];
-      z.x -= game.speed * 1.02;
+      z.x -= game.speed;
       z.wob += 0.2;
       if (z.hurt > 0) z.hurt--;
 
-      // تصادم مع الرصاص
+      // إصابة بالرصاص
       for (let j = bullets.length - 1; j >= 0; j--) {
         const b = bullets[j];
         if (b.x + b.r > z.x - z.w/2 && b.x - b.r < z.x + z.w/2 &&
             b.y > z.y - z.h && b.y < z.y) {
           bullets.splice(j, 1);
           z.hp--; z.hurt = 8;
-          spawnBlood(b.x, b.y);
-          if (z.hp <= 0) {
-            killZombie(i, z);
-            break;
-          }
+          spawnBlood(b.x, b.y, 8, "#5fe08a");
+          if (z.hp <= 0) { killZombie(i, z); Sound.play("kill"); }
+          else Sound.play("hit");
+          break;
         }
       }
       if (z.hp <= 0) continue;
 
       // تصادم مع اللاعب
-      const px1 = player.x - player.w/2 + 6, px2 = player.x + player.w/2 - 6;
+      const px1 = player.x - player.w/2 + 8, px2 = player.x + player.w/2 - 8;
       const py1 = player.y - player.h, py2 = player.y;
       const zx1 = z.x - z.w/2 + 6, zx2 = z.x + z.w/2 - 6;
       const zy1 = z.y - z.h, zy2 = z.y;
       if (px2 > zx1 && px1 < zx2 && py2 > zy1 && py1 < zy2) {
-        // اصطدام: لكن إن كان اللاعب نازلاً فوق رأس الزومبي = دهس
-        if (player.vy > 4 && py2 - z.h * 0.5 < zy1 + 14) {
+        if (player.vy > 4 && py2 - z.h * 0.5 < zy1 + 16) {
+          // دهس من الأعلى
           killZombie(i, z);
-          player.vy = JUMP_V * 0.7; // ارتداد
+          Sound.play("stomp");
+          player.vy = JUMP_V * 0.7;
           player.jumps = 1;
           continue;
+        } else if (player.invuln <= 0) {
+          // إصابة: خسارة قلب
+          player.hearts--;
+          player.invuln = 80;
+          Sound.play("hurt");
+          spawnBlood(player.x, player.y - player.h*0.5, 16, "#ff5a5a");
+          player.vy = -9;
+          if (player.hearts <= 0) { gameOver(); return; }
         }
-        gameOver();
-        return;
       }
-
       if (z.x < -60) zombies.splice(i, 1);
     }
 
-    // مؤثرات
+    // المؤثرات
     for (let i = particles.length - 1; i >= 0; i--) {
       const p = particles[i];
       p.x += p.vx; p.y += p.vy; p.vy += 0.35; p.life--;
@@ -322,56 +535,46 @@
   function killZombie(index, z) {
     zombies.splice(index, 1);
     game.kills++;
-    spawnBlood(z.x, z.y - z.h/2, 18);
-    // نص نقاط طائر
+    spawnBlood(z.x, z.y - z.h/2, 18, "#5fe08a");
     particles.push({ x: z.x, y: z.y - z.h, vx: 0, vy: -1.2, life: 40, text: "+25", c: "#ffd86b" });
   }
-
-  function spawnBlood(x, y, n = 10) {
-    for (let i = 0; i < n; i++) {
+  function spawnBlood(x, y, n, color) {
+    for (let i = 0; i < n; i++)
       particles.push({
         x, y, vx: (Math.random()-0.5)*7, vy: (Math.random()-0.8)*6,
-        life: 24 + Math.random()*16, c: Math.random() < 0.7 ? "#5fe08a" : "#37c46c", r: 2 + Math.random()*3,
+        life: 24 + Math.random()*16, c: color, r: 2 + Math.random()*3,
       });
-    }
   }
 
-  // ===== الرسم =====
+  /* ============================================================
+     الرسم
+     ============================================================ */
   function draw() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    // تعبئة كامل الشاشة باللون الخلفي (للأشرطة عند نسب غريبة)
     ctx.fillStyle = "#0b0f1a";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    // نطبّق التحويل للعالم الافتراضي
     ctx.setTransform(scale * dpr, 0, 0, scale * dpr, offsetX * dpr, offsetY * dpr);
 
     drawSky();
     drawBackground();
     drawGround();
+    drawPlatforms();
     drawParticles(false);
     drawBullets();
     drawZombies();
     drawPlayer();
     drawParticles(true);
-    drawHUD();
+    if (state !== State.MENU) drawHUD();
   }
 
   function drawSky() {
     const g = ctx.createLinearGradient(0, 0, 0, WORLD_H);
-    g.addColorStop(0, "#1a2a52");
-    g.addColorStop(0.5, "#2a3f73");
-    g.addColorStop(1, "#46336b");
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, WORLD_W, WORLD_H);
-
-    // قمر
+    g.addColorStop(0, "#1a2a52"); g.addColorStop(0.5, "#2a3f73"); g.addColorStop(1, "#46336b");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, WORLD_W, WORLD_H);
     ctx.fillStyle = "rgba(255,250,220,0.9)";
-    ctx.beginPath(); ctx.arc(WORLD_W - 130, 100, 46, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(WORLD_W - 170, 120, 52, 0, Math.PI*2); ctx.fill();
     ctx.fillStyle = "#2a3f73";
-    ctx.beginPath(); ctx.arc(WORLD_W - 110, 88, 40, 0, Math.PI*2); ctx.fill();
-
-    // غيوم
+    ctx.beginPath(); ctx.arc(WORLD_W - 148, 106, 44, 0, Math.PI*2); ctx.fill();
     ctx.fillStyle = "rgba(180,195,235,0.25)";
     for (const c of clouds) {
       ctx.beginPath();
@@ -381,189 +584,148 @@
       ctx.fill();
     }
   }
-
   function drawBackground() {
-    // مبانٍ مظلمة في الخلفية
-    ctx.fillStyle = "#1c2747";
     for (const b of bgBuildings) {
-      ctx.fillRect(b.x, GROUND_Y - b.h, b.w, b.h);
-      // نوافذ
-      ctx.fillStyle = "rgba(255,210,120,0.5)";
-      for (let wy = GROUND_Y - b.h + 14; wy < GROUND_Y - 14; wy += 24) {
-        for (let wx = b.x + 10; wx < b.x + b.w - 10; wx += 20) {
-          if ((Math.floor(wx + wy) % 3) === 0) ctx.fillRect(wx, wy, 8, 12);
-        }
-      }
       ctx.fillStyle = "#1c2747";
+      ctx.fillRect(b.x, GROUND_Y - b.h, b.w, b.h);
+      ctx.fillStyle = "rgba(255,210,120,0.5)";
+      for (let wy = GROUND_Y - b.h + 16; wy < GROUND_Y - 16; wy += 26)
+        for (let wx = b.x + 12; wx < b.x + b.w - 12; wx += 22)
+          if ((Math.floor(wx + wy) % 3) === 0) ctx.fillRect(wx, wy, 9, 13);
     }
   }
-
   function drawGround() {
-    ctx.fillStyle = "#20351f";
-    ctx.fillRect(0, GROUND_Y, WORLD_W, WORLD_H - GROUND_Y);
-    ctx.fillStyle = "#2d4a2b";
-    ctx.fillRect(0, GROUND_Y, WORLD_W, 10);
-
-    // خطوط الأرض المتحركة لإيحاء السرعة
-    ctx.strokeStyle = "rgba(120,180,110,0.35)";
-    ctx.lineWidth = 4;
-    const off = (game.distance % 80);
-    for (let x = -off; x < WORLD_W; x += 80) {
-      ctx.beginPath();
-      ctx.moveTo(x, GROUND_Y + 35);
-      ctx.lineTo(x + 30, GROUND_Y + 35);
-      ctx.stroke();
+    ctx.fillStyle = "#20351f"; ctx.fillRect(0, GROUND_Y, WORLD_W, WORLD_H - GROUND_Y);
+    ctx.fillStyle = "#2d4a2b"; ctx.fillRect(0, GROUND_Y, WORLD_W, 12);
+    ctx.strokeStyle = "rgba(120,180,110,0.35)"; ctx.lineWidth = 4;
+    const off = (game.distance % 90);
+    for (let x = -off; x < WORLD_W; x += 90) {
+      ctx.beginPath(); ctx.moveTo(x, GROUND_Y + 40); ctx.lineTo(x + 34, GROUND_Y + 40); ctx.stroke();
     }
   }
-
+  function drawPlatforms() {
+    for (const pf of platforms) {
+      ctx.fillStyle = "#3a2d1e";
+      roundRect(pf.x, pf.y, pf.w, pf.h, 6); ctx.fill();
+      ctx.fillStyle = "#5c8a3a";
+      roundRect(pf.x, pf.y, pf.w, 8, 5); ctx.fill();
+      // دعائم أسفل المنصّة
+      ctx.fillStyle = "rgba(40,30,20,0.55)";
+      ctx.fillRect(pf.x + 14, pf.y + pf.h, 8, 22);
+      ctx.fillRect(pf.x + pf.w - 22, pf.y + pf.h, 8, 22);
+    }
+  }
   function drawPlayer() {
     const x = player.x, y = player.y;
-    const legSwing = Math.sin(player.runFrame) * 10;
+    const legSwing = Math.sin(player.runFrame) * 11;
     const grounded = player.onGround;
+    // وميض عند المناعة بعد الإصابة
+    if (player.invuln > 0 && Math.floor(player.invuln / 5) % 2 === 0) return drawPlayerShadowOnly(x);
 
     ctx.save();
-    // ظل
     ctx.fillStyle = "rgba(0,0,0,0.3)";
+    ctx.beginPath(); ctx.ellipse(x, y + 4, 28, 7, 0, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = "#2a4d8f"; ctx.lineWidth = 10; ctx.lineCap = "round";
     ctx.beginPath();
-    ctx.ellipse(x, GROUND_Y + 4, 26, 7, 0, 0, Math.PI*2);
-    ctx.fill();
-
-    // أرجل
-    ctx.strokeStyle = "#2a4d8f"; ctx.lineWidth = 9; ctx.lineCap = "round";
-    ctx.beginPath();
-    ctx.moveTo(x, y - 26);
-    ctx.lineTo(x - (grounded ? legSwing : 8), y);
-    ctx.moveTo(x, y - 26);
-    ctx.lineTo(x + (grounded ? legSwing : -6), y);
+    ctx.moveTo(x, y - 28); ctx.lineTo(x - (grounded ? legSwing : 8), y);
+    ctx.moveTo(x, y - 28); ctx.lineTo(x + (grounded ? legSwing : -6), y);
     ctx.stroke();
-
-    // جذع
     ctx.fillStyle = "#3a72d4";
-    ctx.beginPath();
-    roundRect(x - 16, y - 56, 32, 34, 8);
-    ctx.fill();
-
-    // ذراع + بندقية
-    ctx.strokeStyle = "#2a4d8f"; ctx.lineWidth = 8;
-    ctx.beginPath();
-    ctx.moveTo(x, y - 48);
-    ctx.lineTo(x + 26, y - 44);
-    ctx.stroke();
-    // بندقية
+    roundRect(x - 17, y - 60, 34, 36, 8); ctx.fill();
+    ctx.strokeStyle = "#2a4d8f"; ctx.lineWidth = 9;
+    ctx.beginPath(); ctx.moveTo(x, y - 52); ctx.lineTo(x + 28, y - 47); ctx.stroke();
     ctx.fillStyle = "#3a3f4d";
-    ctx.fillRect(x + 22, y - 49, 26, 8);
-    ctx.fillRect(x + 18, y - 47, 8, 14);
+    ctx.fillRect(x + 24, y - 53, 28, 9); ctx.fillRect(x + 19, y - 51, 9, 15);
     if (player.muzzle > 0) {
       ctx.fillStyle = "#ffd86b";
-      ctx.beginPath();
-      ctx.arc(x + 52, y - 45, 7 + Math.random()*3, 0, Math.PI*2);
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(x + 56, y - 48, 7 + Math.random()*3, 0, Math.PI*2); ctx.fill();
     }
-
-    // رأس
     ctx.fillStyle = "#f3c79a";
-    ctx.beginPath();
-    ctx.arc(x, y - 66, 13, 0, Math.PI*2);
-    ctx.fill();
-    // خوذة
+    ctx.beginPath(); ctx.arc(x, y - 70, 14, 0, Math.PI*2); ctx.fill();
     ctx.fillStyle = "#2f7d4f";
-    ctx.beginPath();
-    ctx.arc(x, y - 68, 14, Math.PI, 0);
-    ctx.fill();
-    ctx.fillRect(x - 14, y - 69, 28, 5);
+    ctx.beginPath(); ctx.arc(x, y - 72, 15, Math.PI, 0); ctx.fill();
+    ctx.fillRect(x - 15, y - 73, 30, 5);
     ctx.restore();
   }
-
+  function drawPlayerShadowOnly(x) {
+    ctx.fillStyle = "rgba(0,0,0,0.3)";
+    ctx.beginPath(); ctx.ellipse(x, player.y + 4, 28, 7, 0, 0, Math.PI*2); ctx.fill();
+  }
   function drawZombies() {
     for (const z of zombies) {
       const x = z.x, y = z.y, h = z.h;
       const sway = Math.sin(z.wob) * 4;
-      ctx.save();
-      // ظل
-      ctx.fillStyle = "rgba(0,0,0,0.3)";
-      ctx.beginPath();
-      ctx.ellipse(x, GROUND_Y + 4, 24, 6, 0, 0, Math.PI*2);
-      ctx.fill();
-
       const body = z.hurt > 0 ? "#d6ffe0" : "#4f9e63";
-      // أرجل
+      ctx.save();
+      ctx.fillStyle = "rgba(0,0,0,0.3)";
+      ctx.beginPath(); ctx.ellipse(x, y + 4, 24, 6, 0, 0, Math.PI*2); ctx.fill();
       ctx.strokeStyle = "#356b43"; ctx.lineWidth = 8; ctx.lineCap = "round";
       ctx.beginPath();
-      ctx.moveTo(x, y - h*0.4);
-      ctx.lineTo(x - 8, y);
-      ctx.moveTo(x, y - h*0.4);
-      ctx.lineTo(x + 8, y);
+      ctx.moveTo(x, y - h*0.4); ctx.lineTo(x - 8, y);
+      ctx.moveTo(x, y - h*0.4); ctx.lineTo(x + 8, y);
       ctx.stroke();
-      // جذع
       ctx.fillStyle = body;
-      roundRect(x - 15 + sway*0.3, y - h*0.78, 30, h*0.45, 7);
-      ctx.fill();
-      // ذراعان ممدودتان للأمام (زومبي)
+      roundRect(x - 15 + sway*0.3, y - h*0.78, 30, h*0.45, 7); ctx.fill();
       ctx.strokeStyle = body; ctx.lineWidth = 8;
-      ctx.beginPath();
-      ctx.moveTo(x + sway*0.3, y - h*0.66);
-      ctx.lineTo(x - 22, y - h*0.5);
-      ctx.stroke();
-      // رأس
+      ctx.beginPath(); ctx.moveTo(x + sway*0.3, y - h*0.66); ctx.lineTo(x - 24, y - h*0.5); ctx.stroke();
       ctx.fillStyle = body;
-      ctx.beginPath();
-      ctx.arc(x + sway*0.4, y - h*0.86, 13, 0, Math.PI*2);
-      ctx.fill();
-      // عيون حمراء
+      ctx.beginPath(); ctx.arc(x + sway*0.4, y - h*0.86, 13, 0, Math.PI*2); ctx.fill();
       ctx.fillStyle = "#ff4444";
       ctx.beginPath(); ctx.arc(x - 5 + sway*0.4, y - h*0.88, 2.4, 0, Math.PI*2); ctx.fill();
       ctx.beginPath(); ctx.arc(x + 3 + sway*0.4, y - h*0.88, 2.4, 0, Math.PI*2); ctx.fill();
       ctx.restore();
     }
   }
-
   function drawBullets() {
     for (const b of bullets) {
       ctx.save();
-      ctx.fillStyle = "#ffe27a";
-      ctx.shadowColor = "#ffae42"; ctx.shadowBlur = 12;
-      ctx.beginPath();
-      ctx.ellipse(b.x, b.y, b.r + 4, b.r - 1, 0, 0, Math.PI*2);
-      ctx.fill();
+      ctx.fillStyle = "#ffe27a"; ctx.shadowColor = "#ffae42"; ctx.shadowBlur = 12;
+      ctx.beginPath(); ctx.ellipse(b.x, b.y, b.r + 4, b.r - 1, 0, 0, Math.PI*2); ctx.fill();
       ctx.restore();
     }
   }
-
   function drawParticles(textPass) {
     for (const p of particles) {
       if (!!p.text !== textPass) continue;
-      const a = Math.max(0, Math.min(1, p.life / 24));
       if (p.text) {
         ctx.globalAlpha = Math.min(1, p.life / 40);
-        ctx.fillStyle = p.c;
-        ctx.font = "bold 22px Arial";
-        ctx.textAlign = "center";
+        ctx.fillStyle = p.c; ctx.font = "bold 24px Arial"; ctx.textAlign = "center";
         ctx.fillText(p.text, p.x, p.y);
         ctx.globalAlpha = 1;
       } else {
-        ctx.globalAlpha = a;
+        ctx.globalAlpha = Math.max(0, Math.min(1, p.life / 24));
         ctx.fillStyle = p.c;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r || 3, 0, Math.PI*2);
-        ctx.fill();
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r || 3, 0, Math.PI*2); ctx.fill();
         ctx.globalAlpha = 1;
       }
     }
   }
-
+  function drawHeart(x, y, s, filled) {
+    ctx.save();
+    ctx.translate(x, y); ctx.scale(s, s);
+    ctx.beginPath();
+    ctx.moveTo(0, 3);
+    ctx.bezierCurveTo(-5, -3, -10, 2, 0, 9);
+    ctx.bezierCurveTo(10, 2, 5, -3, 0, 3);
+    ctx.closePath();
+    ctx.fillStyle = filled ? "#ff4d6d" : "rgba(255,255,255,0.18)";
+    ctx.fill();
+    ctx.lineWidth = 1.2; ctx.strokeStyle = "rgba(0,0,0,0.4)"; ctx.stroke();
+    ctx.restore();
+  }
   function drawHUD() {
+    // قلوب أعلى اليسار
+    for (let i = 0; i < MAX_HEARTS; i++)
+      drawHeart(34 + i * 42, 40, 2.4, i < player.hearts);
+    // النقاط أعلى اليمين
     ctx.textAlign = "right";
-    ctx.font = "bold 30px Arial";
-    ctx.fillStyle = "#fff";
+    ctx.font = "bold 34px Arial"; ctx.fillStyle = "#fff";
     ctx.shadowColor = "rgba(0,0,0,0.6)"; ctx.shadowBlur = 6;
-    ctx.fillText("النقاط: " + game.score, WORLD_W - 24, 46);
-    ctx.font = "bold 22px Arial";
-    ctx.fillStyle = "#8effc1";
-    ctx.fillText("🧟 " + game.kills, WORLD_W - 24, 78);
+    ctx.fillText("النقاط: " + game.score, WORLD_W - 28, 48);
+    ctx.font = "bold 24px Arial"; ctx.fillStyle = "#8effc1";
+    ctx.fillText("🧟 " + game.kills, WORLD_W - 28, 84);
     ctx.shadowBlur = 0;
   }
-
-  // أداة مساعدة: مستطيل بزوايا دائرية
   function roundRect(x, y, w, h, r) {
     ctx.beginPath();
     ctx.moveTo(x + r, y);
@@ -574,39 +736,82 @@
     ctx.closePath();
   }
 
-  // ===== إدارة الشاشات =====
+  /* ============================================================
+     الشاشات والإعدادات
+     ============================================================ */
   const startScreen = document.getElementById("startScreen");
+  const settingsScreen = document.getElementById("settingsScreen");
   const gameOverScreen = document.getElementById("gameOverScreen");
   const finalScoreEl = document.getElementById("finalScore");
   const bestScoreEl = document.getElementById("bestScore");
 
-  function startGame() {
-    resetGame();
-    state = State.PLAY;
-    startScreen.classList.add("hidden");
-    gameOverScreen.classList.add("hidden");
+  function show(el) {
+    [startScreen, settingsScreen, gameOverScreen].forEach(s => s.classList.add("hidden"));
+    if (el) el.classList.remove("hidden");
   }
 
+  function startGame() {
+    Sound.init(); Sound.resume();
+    resetGame();
+    state = State.PLAY;
+    show(null);
+    Sound.startMusic();
+  }
   function gameOver() {
     state = State.OVER;
-    if (game.score > best) {
-      best = game.score;
-      localStorage.setItem("zombieRunBest", String(best));
-    }
+    Sound.play("over");
+    Sound.stopMusic();
+    if (game.score > best) { best = game.score; localStorage.setItem("zombieRunBest", String(best)); }
     finalScoreEl.textContent = game.score;
     bestScoreEl.textContent = best;
-    gameOverScreen.classList.remove("hidden");
+    show(gameOverScreen);
+  }
+  function goMenu() {
+    state = State.MENU;
+    Sound.stopMusic();
+    show(startScreen);
   }
 
   document.getElementById("startBtn").addEventListener("click", startGame);
   document.getElementById("restartBtn").addEventListener("click", startGame);
+  document.getElementById("menuBtn").addEventListener("click", goMenu);
+  document.getElementById("settingsBtn").addEventListener("click", () => { Sound.init(); show(settingsScreen); });
+  document.getElementById("settingsBackBtn").addEventListener("click", () => show(startScreen));
 
-  // حلقة الرسم
-  function loop() {
-    update();
-    draw();
-    requestAnimationFrame(loop);
+  // مفاتيح الإعدادات
+  const sfxToggle = document.getElementById("sfxToggle");
+  const musicToggle = document.getElementById("musicToggle");
+  const diffSeg = document.getElementById("diffSeg");
+
+  function syncSettingsUI() {
+    sfxToggle.classList.toggle("on", settings.sfx);
+    musicToggle.classList.toggle("on", settings.music);
+    diffSeg.querySelectorAll("button").forEach(b =>
+      b.classList.toggle("active", b.dataset.diff === settings.diff));
   }
+  sfxToggle.addEventListener("click", () => {
+    settings.sfx = !settings.sfx;
+    Sound.sfxOn = settings.sfx;
+    localStorage.setItem("zr_sfx", settings.sfx ? "1" : "0");
+    syncSettingsUI();
+    if (settings.sfx) Sound.play("shoot");
+  });
+  musicToggle.addEventListener("click", () => {
+    settings.music = !settings.music;
+    localStorage.setItem("zr_music", settings.music ? "1" : "0");
+    Sound.setMusicEnabled(settings.music);
+    syncSettingsUI();
+  });
+  diffSeg.querySelectorAll("button").forEach(b =>
+    b.addEventListener("click", () => {
+      settings.diff = b.dataset.diff;
+      localStorage.setItem("zr_diff", settings.diff);
+      syncSettingsUI();
+    }));
+  syncSettingsUI();
+
+  // الحلقة الرئيسية
+  function loop() { update(); draw(); requestAnimationFrame(loop); }
   loop();
 })();
 </script>
