@@ -2,505 +2,376 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="theme-color" content="#160d22" />
-<title>زحف الزومبي — Zombie Runner</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-  html, body {
-    width: 100%; height: 100%; overflow: hidden;
-    background: #160d22; touch-action: none; overscroll-behavior: none;
-    font-family: -apple-system, "Segoe UI", Tahoma, Arial, sans-serif;
-    user-select: none; -webkit-user-select: none;
-  }
-  #game { display: block; position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
-  .overlay {
-    position: absolute; inset: 0; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; text-align: center;
-    color: #f3e9ff; z-index: 10; padding: calc(env(safe-area-inset-top) + 10px) 6vw calc(env(safe-area-inset-bottom) + 10px);
-    background: linear-gradient(180deg, rgba(22,13,34,.55), rgba(22,13,34,.86) 70%); backdrop-filter: blur(1px);
-  }
-  .overlay.hidden { display: none; }
-  .title {
-    font-size: clamp(36px, 10vw, 86px); font-weight: 900; letter-spacing: 1px; line-height: 1.04;
-    color: #ff7a3d; margin-bottom: 6px; text-shadow: 0 0 18px rgba(255,120,60,.7), 0 0 42px rgba(255,70,40,.5), 0 5px 0 #5a1208;
-  }
-  .subtitle { font-size: clamp(14px, 3.8vw, 23px); color: #c9a9ff; margin-bottom: 30px; letter-spacing:.5px; }
-  .btn {
-    font-family: inherit; font-size: clamp(19px, 5vw, 27px); font-weight: 800; color: #1a0e22;
-    background: linear-gradient(180deg, #ffd23f, #ff9a1f); border: none; border-radius: 15px;
-    padding: 15px 40px; cursor: pointer; margin: 8px 0; min-width: 250px;
-    box-shadow: 0 7px 0 #b85e00, 0 14px 28px rgba(0,0,0,.5); transition: transform .06s, box-shadow .06s;
-  }
-  .btn:active { transform: translateY(5px); box-shadow: 0 2px 0 #b85e00, 0 8px 14px rgba(0,0,0,.5); }
-  .btn:disabled { filter: grayscale(.6) brightness(.8); cursor: default; }
-  .btn.secondary { color: #f3e9ff; background: linear-gradient(180deg, #7a4bd0, #4a2a8f); box-shadow: 0 7px 0 #2c1660, 0 14px 28px rgba(0,0,0,.5); }
-  .btn.secondary:active { box-shadow: 0 2px 0 #2c1660, 0 8px 14px rgba(0,0,0,.5); }
-  .hint { margin-top: 24px; font-size: clamp(13px, 3.3vw, 18px); color: #d8c6f5; line-height: 1.9; max-width: 580px; }
-  .hint b { color: #ff9a4d; }
-  .score-big { font-size: clamp(26px, 7vw, 48px); font-weight: 900; color: #ffd23f; margin: 6px 0 2px; }
-  .best { color: #c9a9ff; font-size: clamp(14px, 3.6vw, 20px); margin-bottom: 22px; }
-  .panel { background: rgba(40,24,64,.66); border: 1px solid rgba(170,130,240,.32); border-radius: 18px; padding: 14px 22px; width: min(450px, 88vw); margin-bottom: 18px; }
-  .row { display: flex; align-items: center; justify-content: space-between; padding: 15px 4px; border-bottom: 1px solid rgba(170,130,240,.18); font-size: clamp(16px, 4.4vw, 22px); font-weight: 700; color: #ecdfff; }
-  .row:last-child { border-bottom: none; }
-  .toggle { position: relative; width: 64px; height: 34px; border-radius: 20px; background: #4a3a66; transition: background .2s; cursor: pointer; flex: 0 0 auto; }
-  .toggle.on { background: #ff9a1f; }
-  .toggle::after { content: ""; position: absolute; top: 4px; right: 4px; width: 26px; height: 26px; border-radius: 50%; background: #fff; transition: transform .2s; }
-  .toggle.on::after { transform: translateX(-30px); }
-  .seg { display: flex; gap: 6px; }
-  .seg button { font-family: inherit; font-size: clamp(13px,3.6vw,17px); font-weight: 800; color: #d8c6f5; background: #3a2a58; border: 1px solid rgba(170,130,240,.3); border-radius: 10px; padding: 8px 14px; cursor: pointer; }
-  .seg button.active { background: #ff9a1f; color: #1a0e22; border-color: #ff9a1f; }
-  .credit { position: absolute; bottom: 6px; left: 0; right: 0; text-align: center; font-size: 11px; color: rgba(220,200,255,.45); z-index: 11; }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#070710" />
+<title>Legion Shop — متجرك الأول للألعاب والإلكترونيات في العراق</title>
+<meta name="description" content="ليجن شوب — وجهتك الأولى لشراء أجهزة الألعاب، PlayStation، Xbox، نينتندو، الحواسيب، الإكسسوارات والبطاقات الرقمية في العراق. أسعار منافسة، أصلي 100%، وتوصيل سريع لكل المحافظات." />
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
-<canvas id="game"></canvas>
 
-<div id="startScreen" class="overlay">
-  <div class="title">زحف الزومبي</div>
-  <div class="subtitle">اركض، أطلق النار، وانجُ من القطيع 🧟</div>
-  <button id="startBtn" class="btn" disabled>⏳ جارٍ التحميل…</button>
-  <button id="settingsBtn" class="btn secondary">⚙️ الإعدادات</button>
-  <div class="hint">
-    الجندي يركض <b>تلقائياً</b> — وأنت تتحكم بالباقي:<br>
-    👆 المس <b>يمين الشاشة</b> للقفز (قفزة مزدوجة)<br>
-    🔫 المس <b>يسار الشاشة</b> لإطلاق النار<br>
-    اقفز على المنصّات، ادهس الزومبي أو أطلق عليه. لديك ❤️❤️❤️
+<!-- ============ ANNOUNCEMENT BAR ============ -->
+<div class="topbar">
+  <div class="marquee">
+    <span>🚚 توصيل سريع لجميع محافظات العراق</span>
+    <span>✅ منتجات أصلية 100% بضمان رسمي</span>
+    <span>💳 الدفع عند الاستلام متاح</span>
+    <span>🔥 عروض أسبوعية على أحدث الأجهزة</span>
+    <span>🎮 أكبر تشكيلة ألعاب وإكسسوارات</span>
+    <span>🚚 توصيل سريع لجميع محافظات العراق</span>
+    <span>✅ منتجات أصلية 100% بضمان رسمي</span>
+    <span>💳 الدفع عند الاستلام متاح</span>
+    <span>🔥 عروض أسبوعية على أحدث الأجهزة</span>
+    <span>🎮 أكبر تشكيلة ألعاب وإكسسوارات</span>
   </div>
 </div>
 
-<div id="settingsScreen" class="overlay hidden">
-  <div class="title" style="font-size:clamp(28px,7vw,56px);">الإعدادات</div>
-  <div class="panel">
-    <div class="row"><span>🔊 المؤثرات الصوتية</span><div id="sfxToggle" class="toggle on"></div></div>
-    <div class="row"><span>🎵 الموسيقى</span><div id="musicToggle" class="toggle on"></div></div>
-    <div class="row">
-      <span>🎮 الصعوبة</span>
-      <div id="diffSeg" class="seg">
-        <button data-diff="easy">سهل</button>
-        <button data-diff="normal">عادي</button>
-        <button data-diff="hard">صعب</button>
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="container">
+    <nav class="nav">
+      <button class="icon-btn hamburger" id="menuBtn" aria-label="القائمة">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <a href="#home" class="brand" aria-label="Legion Shop"><img src="assets/img/logo.svg" alt="Legion Shop" /></a>
+
+      <ul class="nav-links">
+        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="#categories">الأقسام</a></li>
+        <li><a href="#products">المنتجات</a></li>
+        <li><a href="#deal">العروض</a></li>
+        <li><a href="#why">لماذا نحن</a></li>
+        <li><a href="#contact">تواصل معنا</a></li>
+      </ul>
+
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" id="searchInput" placeholder="ابحث عن منتج، علامة تجارية…" aria-label="بحث" />
+      </div>
+
+      <div class="nav-actions">
+        <button class="icon-btn" aria-label="المفضلة">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21l7.7-7.6 1.1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="حسابي">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        </button>
+        <button class="icon-btn" id="cartBtn" aria-label="السلة">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2.3 12.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L21.5 7H6"/></svg>
+          <span class="badge-count" id="cartBadge">0</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+<!-- ============ HERO ============ -->
+<section class="hero section" id="home">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="hero-badge reveal"><span class="dot"></span> الأول في العراق لعالم الألعاب</span>
+        <h1 class="reveal d1">ادخل عالم <span class="text-grad">الألعاب</span> بأعلى مستوى من الاحتراف</h1>
+        <p class="lead reveal d2">من أجهزة PlayStation و Xbox ونينتندو، إلى الحواسيب والإكسسوارات والبطاقات الرقمية — كل ما يحتاجه اللاعب الحقيقي في مكان واحد، أصلي ومضمون وبأفضل الأسعار.</p>
+        <div class="hero-cta reveal d3">
+          <a href="#products" class="btn btn-primary btn-lg">تسوّق الآن
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+          </a>
+          <a href="#deal" class="btn btn-ghost btn-lg">عروض اليوم 🔥</a>
+        </div>
+        <div class="hero-stats reveal d4">
+          <div class="stat"><div class="num"><span data-count="45000" data-suffix="+">0</span></div><div class="lbl">عميل سعيد</div></div>
+          <div class="stat"><div class="num"><span data-count="1200" data-suffix="+">0</span></div><div class="lbl">منتج متوفر</div></div>
+          <div class="stat"><div class="num"><span data-count="18">0</span></div><div class="lbl">محافظة نوصل إليها</div></div>
+          <div class="stat"><div class="num"><span data-count="99" data-suffix="%">0</span></div><div class="lbl">رضا العملاء</div></div>
+        </div>
+      </div>
+
+      <div class="hero-visual" id="heroVisual">
+        <div class="hero-orb"></div>
+        <div class="hero-ring r1"></div>
+        <div class="hero-ring r2"></div>
+        <div class="hero-card">
+          <div class="ctrl-art">🎮</div>
+          <span class="pill">🔥 الأكثر مبيعاً</span>
+          <h3>PlayStation 5 Pro</h3>
+          <div class="price"><span class="now">1,090,000 د.ع</span><span class="was">1,190,000</span></div>
+        </div>
+        <div class="hero-float hf-1"><span class="ic">🚚</span> توصيل سريع</div>
+        <div class="hero-float hf-2"><span class="ic">🛡️</span> ضمان رسمي</div>
       </div>
     </div>
   </div>
-  <button id="settingsBackBtn" class="btn">↩ رجوع</button>
-</div>
+</section>
 
-<div id="gameOverScreen" class="overlay hidden">
-  <div class="title" style="color:#ff5252; text-shadow:0 0 18px rgba(255,70,70,.7),0 5px 0 #4a0808;">انتهت اللعبة</div>
-  <div class="score-big">النتيجة: <span id="finalScore">0</span></div>
-  <div class="best">أفضل نتيجة: <span id="bestScore">0</span></div>
-  <button id="restartBtn" class="btn">↻ العب مرة أخرى</button>
-  <button id="menuBtn" class="btn secondary">🏠 القائمة الرئيسية</button>
-</div>
+<!-- ============ TRUST STRIP ============ -->
+<section class="trust">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h13v13H1zM14 8h4l3 3v5h-7zM5.5 19.5a2 2 0 1 0 0-.1zM17.5 19.5a2 2 0 1 0 0-.1z"/></svg></span>
+        <div><h4>توصيل سريع</h4><p>لكل محافظات العراق</p></div>
+      </div>
+      <div class="trust-item reveal d1">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div><h4>منتجات أصلية</h4><p>بضمان رسمي معتمد</p></div>
+      </div>
+      <div class="trust-item reveal d2">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
+        <div><h4>دفع آمن</h4><p>عند الاستلام أو إلكترونياً</p></div>
+      </div>
+      <div class="trust-item reveal d3">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.9A8.5 8.5 0 1 1 21 11.5Z"/></svg></span>
+        <div><h4>دعم 24/7</h4><p>فريق جاهز لمساعدتك</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div class="credit">رسومات وأصوات: ansimuz & Phaser examples (CC-BY) — مدمجة في اللعبة</div>
+<!-- ============ CATEGORIES ============ -->
+<section class="section" id="categories">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">تسوّق حسب القسم</span>
+      <h2>استكشف <span class="text-grad">أقسامنا</span></h2>
+      <p>كل ما تحتاجه من عالم الألعاب والتقنية مرتّب بعناية لتصل إلى ما تريده بسرعة.</p>
+    </div>
+    <div class="cat-grid" id="categoryGrid"></div>
+  </div>
+</section>
 
-<script>
-(function () {
-  "use strict";
+<!-- ============ PRODUCTS ============ -->
+<section class="section" id="products">
+  <div class="container">
+    <div class="section-head head-row">
+      <div class="reveal">
+        <span class="eyebrow">مختارات ليجن</span>
+        <h2>الأكثر <span class="text-grad">مبيعاً</span></h2>
+      </div>
+    </div>
+    <div class="filter-bar reveal" id="filterBar"></div>
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
 
-  /* ============================================================
-     الصوت — مؤثرات احترافية حقيقية (ملفات) + موسيقى خلفية
-     ============================================================ */
-  const Sound = {
-    ctx: null, master: null, buffers: {}, music: null, wantMusic: false,
-    sfxOn: true, musicOn: true,
-    init() {
-      if (this.ctx) return;
-      const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
-      this.ctx = new AC();
-      this.master = this.ctx.createGain(); this.master.gain.value = 0.9; this.master.connect(this.ctx.destination);
-    },
-    resume() {
-      if (this.ctx && this.ctx.state === "suspended") this.ctx.resume();
-      if (this.music && this.musicOn && this.wantMusic) this.music.play().catch(() => {});
-    },
-    loadSample(name, url) {
-      this.init(); if (!this.ctx) return Promise.resolve();
-      return fetch(url).then(r => r.arrayBuffer()).then(b => new Promise(res => {
-        this.ctx.decodeAudioData(b, buf => { this.buffers[name] = buf; res(); }, () => res());
-      })).catch(() => {});
-    },
-    loadMusic(url) { this.music = new Audio(url); this.music.loop = true; this.music.volume = 0.42; this.music.preload = "auto"; },
-    sample(name, vol) {
-      if (!this.sfxOn || !this.ctx || !this.buffers[name]) return;
-      const s = this.ctx.createBufferSource(); s.buffer = this.buffers[name];
-      const g = this.ctx.createGain(); g.gain.value = vol == null ? 1 : vol;
-      s.connect(g); g.connect(this.master); s.start();
-    },
-    growl(vol) { this.sample(Math.random() < 0.5 ? "growl1" : "growl2", vol); },
-    tone(freq, dur, type, vol, slideTo) {
-      if (!this.sfxOn || !this.ctx) return; const t = this.ctx.currentTime;
-      const o = this.ctx.createOscillator(), g = this.ctx.createGain();
-      o.type = type; o.frequency.setValueAtTime(freq, t);
-      if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t + dur);
-      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.01);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-      o.connect(g); g.connect(this.master); o.start(t); o.stop(t + dur + 0.02);
-    },
-    startMusic() { this.wantMusic = true; if (this.music && this.musicOn) { try { this.music.currentTime = 0; } catch (e) {} this.music.play().catch(() => {}); } },
-    stopMusic() { this.wantMusic = false; if (this.music) this.music.pause(); },
-    setMusicEnabled(on) { this.musicOn = on; if (!this.music) return; if (on && this.wantMusic) this.music.play().catch(() => {}); else this.music.pause(); },
-  };
+<!-- ============ DEAL / PROMO ============ -->
+<section class="section" id="deal">
+  <div class="container">
+    <div class="promo reveal">
+      <div class="promo-copy">
+        <span class="eyebrow">عرض محدود</span>
+        <h2>صفقة الأسبوع <span class="text-grad">خصم حتى ٢٥٪</span></h2>
+        <p>أحدث أجهزة وإكسسوارات الألعاب بأسعار لا تُقاوَم — الكميات محدودة، والعرض ينتهي قريباً!</p>
+        <a href="#products" class="btn btn-primary btn-lg">احصل على العرض</a>
+        <div class="countdown" id="countdown">
+          <div class="cd-box"><div class="n" data-h>00</div><div class="u">ساعة</div></div>
+          <div class="cd-box"><div class="n" data-m>00</div><div class="u">دقيقة</div></div>
+          <div class="cd-box"><div class="n" data-s>00</div><div class="u">ثانية</div></div>
+        </div>
+      </div>
+      <div class="promo-visual"><div class="big">🎁</div></div>
+    </div>
+  </div>
+</section>
 
-  /* ============================================================
-     الإعداد والرسم المتجاوب
-     ============================================================ */
-  const canvas = document.getElementById("game");
-  const ctx = canvas.getContext("2d");
-  const WORLD_W = 1280, WORLD_H = 720, GROUND_Y = 596;
-  let scale = 1, offsetX = 0, offsetY = 0, dpr = 1, cssW = 0, cssH = 0;
+<!-- ============ BRANDS ============ -->
+<section class="brands">
+  <div style="padding:1.6rem 0">
+    <div class="brands-track">
+      <span class="brand-logo">🎮 PlayStation</span>
+      <span class="brand-logo">🟢 Xbox</span>
+      <span class="brand-logo">🍄 Nintendo</span>
+      <span class="brand-logo">💻 Lenovo Legion</span>
+      <span class="brand-logo">🐍 Razer</span>
+      <span class="brand-logo">🎧 SteelSeries</span>
+      <span class="brand-logo">🖱️ Logitech</span>
+      <span class="brand-logo">🖥️ ASUS ROG</span>
+      <span class="brand-logo">🎮 PlayStation</span>
+      <span class="brand-logo">🟢 Xbox</span>
+      <span class="brand-logo">🍄 Nintendo</span>
+      <span class="brand-logo">💻 Lenovo Legion</span>
+      <span class="brand-logo">🐍 Razer</span>
+      <span class="brand-logo">🎧 SteelSeries</span>
+      <span class="brand-logo">🖱️ Logitech</span>
+      <span class="brand-logo">🖥️ ASUS ROG</span>
+    </div>
+  </div>
+</section>
 
-  function resize() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2.5);
-    cssW = window.innerWidth; cssH = window.innerHeight;
-    canvas.style.width = cssW + "px"; canvas.style.height = cssH + "px";
-    canvas.width = Math.floor(cssW * dpr); canvas.height = Math.floor(cssH * dpr);
-    scale = Math.max(cssW / WORLD_W, cssH / WORLD_H);
-    offsetX = (cssW - WORLD_W * scale) / 2; offsetY = (cssH - WORLD_H * scale) / 2;
-  }
-  window.addEventListener("resize", resize);
-  window.addEventListener("orientationchange", () => setTimeout(resize, 200));
-  resize();
+<!-- ============ WHY US ============ -->
+<section class="section" id="why">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">لماذا ليجن شوب</span>
+      <h2>تجربة تسوّق <span class="text-grad">تستحق ثقتك</span></h2>
+      <p>نوفّر لك أكثر من مجرد منتج — نقدّم تجربة كاملة من الجودة، السرعة، والدعم.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <h3>أصالة مضمونة</h3>
+        <p>كل منتج أصلي 100% ويأتي بضمان رسمي معتمد، لتشتري وأنت مطمئن تماماً.</p>
+      </div>
+      <div class="why-card reveal d1">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></span>
+        <h3>توصيل سريع</h3>
+        <p>نوصل طلبك إلى بابك في بغداد وكل المحافظات بأسرع وقت ممكن وبتغليف آمن.</p>
+      </div>
+      <div class="why-card reveal d2">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.9A8.5 8.5 0 1 1 21 11.5Z"/></svg></span>
+        <h3>دعم متواصل</h3>
+        <p>فريق خدمة العملاء جاهز للرد على استفساراتك ومساعدتك قبل وبعد الشراء.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  /* ============================================================
-     تحميل الأصول
-     ============================================================ */
-  const IMG = {}, ATLAS = {};
-  let assetsReady = false;
-  function loadImg(name, src) { return new Promise(res => { const im = new Image(); im.onload = () => { IMG[name] = im; res(); }; im.onerror = () => { IMG[name] = null; res(); }; im.src = src; }); }
-  function loadAtlas(name, src) { return fetch(src).then(r => r.json()).then(j => { const m = {}; (j.textures ? j.textures[0].frames : j.frames).forEach(f => { m[f.filename] = f; }); ATLAS[name] = m; }).catch(() => { ATLAS[name] = {}; }); }
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">آراء عملائنا</span>
+      <h2>ماذا يقول <span class="text-grad">اللاعبون</span> عنّا</h2>
+    </div>
+    <div class="tst-grid">
+      <div class="tst-card reveal">
+        <div class="stars" style="color:var(--gold)">★★★★★</div>
+        <p>«طلبت بلايستيشن 5 ووصلني خلال يوم واحد لبغداد، أصلي ومغلّف بشكل ممتاز. تجربة شراء محترمة جداً.»</p>
+        <div class="tst-author"><div class="tst-avatar">ح</div><div><div class="name">حسين العامري</div><div class="role">بغداد</div></div></div>
+      </div>
+      <div class="tst-card reveal d1">
+        <div class="stars" style="color:var(--gold)">★★★★★</div>
+        <p>«أفضل متجر تعاملت معه لشراء إكسسوارات الألعاب. الأسعار منافسة والدعم يرد بسرعة على كل سؤال.»</p>
+        <div class="tst-author"><div class="tst-avatar">ز</div><div><div class="name">زينب كريم</div><div class="role">البصرة</div></div></div>
+      </div>
+      <div class="tst-card reveal d2">
+        <div class="stars" style="color:var(--gold)">★★★★★</div>
+        <p>«اشتريت لابتوب Legion للألعاب وكان الجهاز جديد بالكرتون وبضمان. صار متجري المفضّل بدون منافس.»</p>
+        <div class="tst-author"><div class="tst-avatar">م</div><div><div class="name">مصطفى الدليمي</div><div class="role">أربيل</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  Sound.init();
-  Sound.loadMusic("assets/audio/music.m4a");
-  Promise.all([
-    loadImg("far", "assets/bg-far.png"), loadImg("back", "assets/bg-back.png"), loadImg("fore", "assets/bg-fore.png"),
-    loadImg("soldier", "assets/soldier.png"), loadImg("zombie", "assets/zombie.png"),
-    loadAtlas("soldier", "assets/soldier.json"), loadAtlas("zombie", "assets/zombie.json"),
-    Sound.loadSample("shoot", "assets/audio/shoot.wav"),
-    Sound.loadSample("hit", "assets/audio/hit.wav"),
-    Sound.loadSample("kill", "assets/audio/kill.wav"),
-    Sound.loadSample("growl1", "assets/audio/growl1.mp3"),
-    Sound.loadSample("growl2", "assets/audio/growl2.mp3"),
-    Sound.loadSample("gameover", "assets/audio/gameover.wav"),
-  ]).then(() => { assetsReady = true; const b = document.getElementById("startBtn"); b.disabled = false; b.textContent = "▶ ابدأ اللعب"; });
+<!-- ============ NEWSLETTER ============ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="newsletter reveal">
+      <h2>اشترك واحصل على <span class="text-grad">أحدث العروض</span></h2>
+      <p>كن أول من يعرف بالتخفيضات والمنتجات الجديدة فور وصولها — مباشرة إلى بريدك.</p>
+      <form class="nl-form" id="nlForm">
+        <input type="email" placeholder="أدخل بريدك الإلكتروني" required aria-label="البريد الإلكتروني" />
+        <button type="submit" class="btn btn-primary">اشترك الآن</button>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
 
-  const A_RUN = [1,2,3,4,5,6,7,8].map(n => "Soldier_2_walk_" + n);
-  const A_SHOOT = [1,2,3,4,5,6,7,8].map(n => "Soldier_2_shot_front_" + n);
-  const Z_WALK = [0,1,2,3,4,5,6,7,8].map(n => "walk_00" + n);
-  const Z_DEATH = [0,1,2,3,4,5].map(n => "Death_00" + n);
-  const SOLDIER_SCALE = 1.42;
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand"><img src="assets/img/logo.svg" alt="Legion Shop" /></div>
+        <p class="about">ليجن شوب — وجهتك الأولى لعالم الألعاب والإلكترونيات في العراق. منتجات أصلية، أسعار منافسة، وخدمة تليق بك.</p>
+        <div class="socials">
+          <a href="#" class="social" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" class="social" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v7h3v-7h3l1-3h-4v-2c0-.6.4-1 1-1Z"/></svg></a>
+          <a href="#" class="social" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.2-.2-1.2-1.5-1.2-2.9 0-1.3.7-2 1-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.4.6-.3.3c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.2 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.6.3.1.3.1.7-.1 1.2Z"/></svg></a>
+          <a href="#" class="social" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 4.3 2.8 11.5c-1 .4-1 1.8.1 2.1l4.6 1.4 1.8 5.6c.2.7 1.1.9 1.6.3l2.5-2.6 4.7 3.5c.7.5 1.6.1 1.8-.7l3.2-15c.2-1-.8-1.8-1.6-1.3ZM9.6 14.3l8.3-5.2c.2-.1.4.2.2.3l-6.7 6.2c-.2.2-.4.5-.4.8l-.2 2.2-1.2-3.6c-.1-.4 0-.8.2-.9Z"/></svg></a>
+        </div>
+      </div>
 
-  // رسم إطار atlas بمعامل تحجيم ثابت: قاع البكسل المرئي يستقر عند footY
-  function drawFrame(img, atlas, name, cx, footY, scl, faceLeft) {
-    const f = atlas && atlas[name]; if (!img || !f) return false;
-    const sw = f.sourceSize.w * scl;
-    const dw = f.frame.w * scl, dh = f.frame.h * scl;
-    const dx = (cx - sw / 2) + f.spriteSourceSize.x * scl;
-    const dy = footY - dh;
-    ctx.save();
-    if (faceLeft) { ctx.translate(cx, 0); ctx.scale(-1, 1); ctx.translate(-cx, 0); }
-    ctx.drawImage(img, f.frame.x, f.frame.y, f.frame.w, f.frame.h, dx, dy, dw, dh);
-    ctx.restore();
-    return true;
-  }
+      <div>
+        <h4>تسوّق</h4>
+        <ul class="footer-links">
+          <li><a href="#categories">جميع الأقسام</a></li>
+          <li><a href="#products">الأكثر مبيعاً</a></li>
+          <li><a href="#deal">العروض والتخفيضات</a></li>
+          <li><a href="#products">وصل حديثاً</a></li>
+          <li><a href="#products">البطاقات الرقمية</a></li>
+        </ul>
+      </div>
 
-  /* ============================================================
-     الحالة والإعدادات
-     ============================================================ */
-  const State = { MENU: 0, PLAY: 1, OVER: 2 };
-  let state = State.MENU;
-  const DIFF = { easy: { speed: 6.0, spawn: 120 }, normal: { speed: 7.0, spawn: 95 }, hard: { speed: 8.5, spawn: 75 } };
-  const settings = { sfx: localStorage.getItem("zr_sfx") !== "0", music: localStorage.getItem("zr_music") !== "0", diff: localStorage.getItem("zr_diff") || "normal" };
-  Sound.sfxOn = settings.sfx; Sound.musicOn = settings.music;
-  let best = parseInt(localStorage.getItem("zombieRunBest") || "0", 10);
+      <div>
+        <h4>روابط مهمة</h4>
+        <ul class="footer-links">
+          <li><a href="#why">من نحن</a></li>
+          <li><a href="#contact">تواصل معنا</a></li>
+          <li><a href="#">سياسة الإرجاع</a></li>
+          <li><a href="#">الشحن والتوصيل</a></li>
+          <li><a href="#">الأسئلة الشائعة</a></li>
+        </ul>
+      </div>
 
-  const game = { speed: 7, baseSpeed: 7, distance: 0, bgX: 0, score: 0, kills: 0, spawnTimer: 0, spawnGap: 95, platTimer: 0, shootCooldown: 0 };
-  const MAX_HEARTS = 3, GRAVITY = 0.95, JUMP_V = -18, MAX_JUMPS = 2;
-  const player = { x: 320, y: GROUND_Y, w: 56, h: 150, vy: 0, onGround: true, jumps: 0, runFrame: 0, shootAnim: 0, muzzle: 0, hearts: MAX_HEARTS, invuln: 0 };
-  const zombies = [], bullets = [], particles = [];
-  const platforms = [];
+      <div>
+        <h4>تواصل معنا</h4>
+        <div class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 3.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L7.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg><span>+964 770 000 0000</span></div>
+        <div class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg><span>info@legionshopiraq.com</span></div>
+        <div class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>بغداد — العراق، وتوصيل لكل المحافظات</span></div>
+      </div>
+    </div>
 
-  function resetGame() {
-    const d = DIFF[settings.diff] || DIFF.normal;
-    game.speed = game.baseSpeed = d.speed; game.spawnGap = d.spawn;
-    game.distance = 0; game.score = 0; game.kills = 0; game.spawnTimer = 0; game.platTimer = 0; game.shootCooldown = 0;
-    player.y = GROUND_Y; player.vy = 0; player.onGround = true; player.jumps = 0;
-    player.hearts = MAX_HEARTS; player.invuln = 0; player.muzzle = 0; player.shootAnim = 0; player.runFrame = 0;
-    zombies.length = 0; bullets.length = 0; particles.length = 0; platforms.length = 0;
-  }
+    <div class="footer-bottom">
+      <span>© 2026 Legion Shop — جميع الحقوق محفوظة.</span>
+      <div class="pay-methods">
+        <span class="pay">VISA</span>
+        <span class="pay">Mastercard</span>
+        <span class="pay">ZainCash</span>
+        <span class="pay">FastPay</span>
+        <span class="pay">الدفع عند الاستلام</span>
+      </div>
+    </div>
+  </div>
+</footer>
 
-  /* ============================================================
-     التحكم
-     ============================================================ */
-  function jump() {
-    if (player.jumps < MAX_JUMPS) {
-      player.vy = JUMP_V; player.onGround = false; player.jumps++;
-      Sound.tone(player.jumps === 1 ? 320 : 480, 0.17, "square", 0.22, player.jumps === 1 ? 720 : 900);
-      for (let i = 0; i < 8; i++) particles.push({ x: player.x, y: player.y, vx: (Math.random()-0.5)*4, vy: Math.random()*3+1, life: 18, c: "#e8d9ff", r: 3 });
-    }
-  }
-  function shoot() {
-    if (game.shootCooldown > 0) return;
-    game.shootCooldown = 12; player.muzzle = 6; player.shootAnim = 16; Sound.sample("shoot", 0.5);
-    bullets.push({ x: player.x + player.w * 0.55, y: player.y - player.h * 0.55, vx: 20, r: 6 });
-  }
-  function handlePress(clientX) { if (state !== State.PLAY) return; if (clientX > window.innerWidth / 2) jump(); else shoot(); }
-  canvas.addEventListener("touchstart", (e) => { e.preventDefault(); Sound.resume(); for (const t of e.changedTouches) handlePress(t.clientX); }, { passive: false });
-  canvas.addEventListener("mousedown", (e) => { e.preventDefault(); Sound.resume(); handlePress(e.clientX); });
-  window.addEventListener("keydown", (e) => {
-    if (state !== State.PLAY) return;
-    if (e.code === "Space" || e.code === "ArrowUp") { e.preventDefault(); jump(); }
-    if (e.code === "ArrowDown" || e.code === "KeyF" || e.code === "Enter") { e.preventDefault(); shoot(); }
-  });
+<!-- ============ CART DRAWER ============ -->
+<div class="overlay-bg" id="overlay"></div>
 
-  /* ============================================================
-     التوليد
-     ============================================================ */
-  function spawnZombie(x, y) {
-    const tall = Math.random() < 0.3;
-    zombies.push({ x, y, w: tall ? 80 : 70, h: tall ? 150 : 120, hp: tall ? 2 : 1, hurt: 0, frame: Math.random()*Z_WALK.length, dying: 0, scl: tall ? 0.8 : 0.62 });
-    if (Math.random() < 0.35) Sound.growl(0.22);
-  }
-  function spawnPlatform() {
-    const tier = Math.random() < 0.6 ? 1 : 2;
-    const y = GROUND_Y - (tier === 1 ? 165 : 295);
-    const w = 180 + Math.random() * 150;
-    platforms.push({ x: WORLD_W + 60, y, w, h: 26 });
-    if (Math.random() < 0.4) spawnZombie(WORLD_W + 60 + w * (0.3 + Math.random()*0.4), y);
-  }
+<aside class="cart-drawer" id="cartDrawer" aria-label="سلة التسوق">
+  <div class="cart-head">
+    <h3>🛒 سلة التسوّق</h3>
+    <button class="icon-btn" id="closeCart" aria-label="إغلاق">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total"><span>الإجمالي</span><span class="amt" id="cartTotal">0 د.ع</span></div>
+    <button class="btn btn-primary" id="checkoutBtn">إتمام الطلب</button>
+  </div>
+</aside>
 
-  /* ============================================================
-     التحديث
-     ============================================================ */
-  function update() {
-    game.bgX += (state === State.PLAY ? game.speed : 1.6);
-    if (state !== State.PLAY) return;
-    game.baseSpeed += 0.0007; game.speed = game.baseSpeed;
-    game.distance += game.speed; game.score = Math.floor(game.distance / 10) + game.kills * 25;
-    if (game.shootCooldown > 0) game.shootCooldown--;
-    if (player.muzzle > 0) player.muzzle--;
-    if (player.shootAnim > 0) player.shootAnim--;
-    if (player.invuln > 0) player.invuln--;
+<!-- ============ MOBILE MENU ============ -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="القائمة الرئيسية">
+  <div class="mm-head">
+    <img src="assets/img/logo.svg" alt="Legion Shop" style="height:36px" />
+    <button class="icon-btn" id="closeMenu" aria-label="إغلاق">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+  <a href="#home">🏠 الرئيسية</a>
+  <a href="#categories">🗂️ الأقسام</a>
+  <a href="#products">🎮 المنتجات</a>
+  <a href="#deal">🔥 العروض</a>
+  <a href="#why">⭐ لماذا نحن</a>
+  <a href="#contact">📞 تواصل معنا</a>
+</nav>
 
-    const prevFoot = player.y;
-    player.vy += GRAVITY; player.y += player.vy;
-    let support = (player.y >= GROUND_Y) ? GROUND_Y : null;
-    if (player.vy >= 0) {
-      const fh = player.w * 0.34;
-      for (const pf of platforms) {
-        if (player.x + fh > pf.x && player.x - fh < pf.x + pf.w && prevFoot <= pf.y + 10 && player.y >= pf.y) {
-          if (support === null || pf.y < support) support = pf.y;
-        }
-      }
-    }
-    if (support !== null) { player.y = support; player.vy = 0; player.onGround = true; player.jumps = 0; }
-    else player.onGround = false;
-    player.runFrame += game.speed * 0.05;
+<!-- Back to top -->
+<button class="to-top" id="toTop" aria-label="العودة للأعلى">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</button>
 
-    game.spawnTimer++;
-    const gap = Math.max(40, game.spawnGap - game.distance / 220);
-    if (game.spawnTimer >= gap) { game.spawnTimer = 0; spawnZombie(WORLD_W + 60, GROUND_Y); if (Math.random() < 0.2 && game.distance > 1500) spawnZombie(WORLD_W + 150, GROUND_Y); }
-    game.platTimer++;
-    if (game.platTimer >= 90 + Math.random() * 80) { game.platTimer = 0; spawnPlatform(); }
-    for (let i = platforms.length - 1; i >= 0; i--) { platforms[i].x -= game.speed; if (platforms[i].x + platforms[i].w < -40) platforms.splice(i, 1); }
-    for (let i = bullets.length - 1; i >= 0; i--) { bullets[i].x += bullets[i].vx; if (bullets[i].x > WORLD_W + 30) bullets.splice(i, 1); }
+<!-- Toasts -->
+<div class="toast-wrap" id="toastWrap"></div>
 
-    for (let i = zombies.length - 1; i >= 0; i--) {
-      const z = zombies[i];
-      z.x -= game.speed;
-      if (z.hurt > 0) z.hurt--;
-      if (z.dying > 0) { z.dying++; if (z.dying > 36) zombies.splice(i, 1); continue; }
-      z.frame += 0.18;
-
-      for (let j = bullets.length - 1; j >= 0; j--) {
-        const b = bullets[j];
-        if (b.x + b.r > z.x - z.w/2 && b.x - b.r < z.x + z.w/2 && b.y > z.y - z.h && b.y < z.y) {
-          bullets.splice(j, 1); z.hp--; z.hurt = 8; spawnBlood(b.x, b.y, 8, "#6fd06f");
-          if (z.hp <= 0) { z.dying = 1; game.kills++; spawnBlood(z.x, z.y - z.h/2, 16, "#6fd06f"); particles.push({ x: z.x, y: z.y - z.h, vx: 0, vy: -1.2, life: 44, text: "+25", c: "#ffd23f" }); Sound.sample("kill", 0.7); if (Math.random()<0.5) Sound.growl(0.5); }
-          else Sound.sample("hit", 0.55);
-          break;
-        }
-      }
-      if (z.dying > 0) continue;
-
-      const px1 = player.x - player.w/2 + 8, px2 = player.x + player.w/2 - 8, py1 = player.y - player.h, py2 = player.y;
-      const zx1 = z.x - z.w/2 + 6, zx2 = z.x + z.w/2 - 6, zy1 = z.y - z.h, zy2 = z.y;
-      if (px2 > zx1 && px1 < zx2 && py2 > zy1 && py1 < zy2) {
-        if (player.vy > 4 && py2 - z.h * 0.5 < zy1 + 18) {
-          z.dying = 1; game.kills++; spawnBlood(z.x, z.y - z.h/2, 16, "#6fd06f"); Sound.sample("kill", 0.55);
-          player.vy = JUMP_V * 0.7; player.jumps = 1; continue;
-        } else if (player.invuln <= 0) {
-          player.hearts--; player.invuln = 70; Sound.growl(0.9);
-          spawnBlood(player.x, player.y - player.h*0.5, 18, "#ff4d4d"); player.vy = -9;
-          if (player.hearts <= 0) { gameOver(); return; }
-        }
-      }
-      if (z.x < -90) zombies.splice(i, 1);
-    }
-
-    for (let i = particles.length - 1; i >= 0; i--) {
-      const p = particles[i]; p.x += p.vx; p.y += p.vy; p.vy += 0.35; p.life--;
-      if (p.life <= 0) particles.splice(i, 1);
-    }
-  }
-  function spawnBlood(x, y, n, color) {
-    for (let i = 0; i < n; i++) particles.push({ x, y, vx: (Math.random()-0.5)*7, vy: (Math.random()-0.8)*6, life: 24 + Math.random()*16, c: color, r: 2 + Math.random()*3 });
-  }
-
-  /* ============================================================
-     الرسم
-     ============================================================ */
-  function draw() {
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.fillStyle = "#160d22"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.setTransform(scale * dpr, 0, 0, scale * dpr, offsetX * dpr, offsetY * dpr);
-    ctx.imageSmoothingEnabled = false;
-
-    drawSky();
-    drawLayer(IMG.far, 0.18, 430, GROUND_Y + 28);
-    drawLayer(IMG.back, 0.34, 470, GROUND_Y + 28);
-    drawLayer(IMG.fore, 0.9, WORLD_H, WORLD_H);
-    drawGround();
-    drawPlatforms();
-    drawParticles(false);
-    drawBullets();
-    drawZombies();
-    drawPlayer();
-    drawParticles(true);
-    if (state !== State.MENU) drawHUD();
-  }
-
-  function drawSky() {
-    const g = ctx.createLinearGradient(0, 0, 0, WORLD_H);
-    g.addColorStop(0, "#241a3a"); g.addColorStop(0.45, "#3a2350"); g.addColorStop(0.8, "#7a3b56"); g.addColorStop(1, "#c96a4a");
-    ctx.fillStyle = g; ctx.fillRect(0, 0, WORLD_W, WORLD_H);
-    ctx.fillStyle = "rgba(255,220,160,0.85)"; ctx.beginPath(); ctx.arc(WORLD_W * 0.7, 150, 60, 0, Math.PI*2); ctx.fill();
-  }
-  function drawLayer(img, speed, h, baseY) {
-    if (!img) return;
-    const w = img.width * (h / img.height);
-    let off = (game.bgX * speed) % w; if (off < 0) off += w;
-    for (let x = -off; x < WORLD_W + w; x += w) ctx.drawImage(img, x, baseY - h, w, h);
-  }
-  function drawGround() {
-    const g = ctx.createLinearGradient(0, GROUND_Y, 0, WORLD_H);
-    g.addColorStop(0, "#34283f"); g.addColorStop(0.5, "#211826"); g.addColorStop(1, "#120c18");
-    ctx.fillStyle = g; ctx.fillRect(0, GROUND_Y, WORLD_W, WORLD_H - GROUND_Y);
-    // حافة نيون علوية
-    ctx.fillStyle = "#ff7a3d"; ctx.fillRect(0, GROUND_Y - 3, WORLD_W, 4);
-    ctx.fillStyle = "rgba(255,154,31,0.30)"; ctx.fillRect(0, GROUND_Y + 1, WORLD_W, 4);
-    // خطوط الطريق المتحركة
-    ctx.fillStyle = "rgba(255,205,130,0.55)";
-    const period = 150, off = game.bgX % period, y = GROUND_Y + (WORLD_H - GROUND_Y) * 0.46;
-    for (let x = -off; x < WORLD_W; x += period) ctx.fillRect(x, y, 78, 6);
-    // بقع إنارة على الأسفلت
-    ctx.fillStyle = "rgba(255,120,60,0.05)";
-    const p2 = 320, o2 = (game.bgX * 0.9) % p2;
-    for (let x = -o2; x < WORLD_W; x += p2) { ctx.beginPath(); ctx.ellipse(x + 100, WORLD_H - 30, 90, 18, 0, 0, Math.PI*2); ctx.fill(); }
-  }
-  function drawShadow(cx, footY, r) { ctx.fillStyle = "rgba(0,0,0,0.34)"; ctx.beginPath(); ctx.ellipse(cx, footY - 2, r, r * 0.26, 0, 0, Math.PI*2); ctx.fill(); }
-  function drawPlatforms() {
-    for (const pf of platforms) {
-      ctx.fillStyle = "#241830"; roundRect(pf.x, pf.y, pf.w, pf.h, 6); ctx.fill();
-      ctx.fillStyle = "#ff9a1f"; roundRect(pf.x, pf.y, pf.w, 7, 4); ctx.fill();
-      ctx.fillStyle = "rgba(255,154,31,0.25)"; ctx.fillRect(pf.x, pf.y + 7, pf.w, 3);
-      ctx.fillStyle = "rgba(20,12,28,0.6)"; ctx.fillRect(pf.x + 16, pf.y + pf.h, 9, 26); ctx.fillRect(pf.x + pf.w - 25, pf.y + pf.h, 9, 26);
-    }
-  }
-  function drawPlayer() {
-    drawShadow(player.x, player.y, 30);
-    if (player.invuln > 0 && Math.floor(player.invuln / 5) % 2 === 0) return;
-    let list, idx;
-    if (player.shootAnim > 0) { list = A_SHOOT; idx = Math.floor((16 - player.shootAnim) / 16 * list.length); }
-    else { list = A_RUN; idx = Math.floor(player.runFrame) % list.length; }
-    const name = list[Math.min(idx, list.length - 1)];
-    const ok = drawFrame(IMG.soldier, ATLAS.soldier, name, player.x, player.y, SOLDIER_SCALE, false);
-    if (!ok) { ctx.fillStyle = "#3a72d4"; ctx.fillRect(player.x - 20, player.y - player.h, 40, player.h); }
-    if (player.muzzle > 0) {
-      ctx.fillStyle = "#ffe27a"; ctx.shadowColor = "#ffae42"; ctx.shadowBlur = 16;
-      ctx.beginPath(); ctx.arc(player.x + player.w * 0.62, player.y - player.h * 0.55, 9 + Math.random()*4, 0, Math.PI*2); ctx.fill(); ctx.shadowBlur = 0;
-    }
-  }
-  function drawZombies() {
-    for (const z of zombies) {
-      drawShadow(z.x, z.y, z.w * 0.42);
-      let name;
-      if (z.dying > 0) { const idx = Math.min(Z_DEATH.length - 1, Math.floor(z.dying / 36 * Z_DEATH.length)); name = Z_DEATH[idx]; }
-      else name = Z_WALK[Math.floor(z.frame) % Z_WALK.length];
-      if (z.hurt > 0) { ctx.save(); ctx.globalAlpha = 0.8; }
-      const ok = drawFrame(IMG.zombie, ATLAS.zombie, name, z.x, z.y, z.scl, true);
-      if (z.hurt > 0) ctx.restore();
-      if (!ok) { ctx.fillStyle = "#4f9e63"; ctx.fillRect(z.x - 22, z.y - z.h, 44, z.h); }
-    }
-  }
-  function drawBullets() {
-    for (const b of bullets) { ctx.save(); ctx.fillStyle = "#ffe27a"; ctx.shadowColor = "#ffae42"; ctx.shadowBlur = 12; ctx.beginPath(); ctx.ellipse(b.x, b.y, b.r + 5, b.r - 1, 0, 0, Math.PI*2); ctx.fill(); ctx.restore(); }
-  }
-  function drawParticles(textPass) {
-    for (const p of particles) {
-      if (!!p.text !== textPass) continue;
-      if (p.text) { ctx.globalAlpha = Math.min(1, p.life / 44); ctx.fillStyle = p.c; ctx.font = "bold 26px Arial"; ctx.textAlign = "center"; ctx.fillText(p.text, p.x, p.y); ctx.globalAlpha = 1; }
-      else { ctx.globalAlpha = Math.max(0, Math.min(1, p.life / 24)); ctx.fillStyle = p.c; ctx.beginPath(); ctx.arc(p.x, p.y, p.r || 3, 0, Math.PI*2); ctx.fill(); ctx.globalAlpha = 1; }
-    }
-  }
-  function heartPath(x, y, s) {
-    ctx.beginPath(); ctx.moveTo(x, y + 3*s);
-    ctx.bezierCurveTo(x - 5*s, y - 3*s, x - 10*s, y + 2*s, x, y + 9*s);
-    ctx.bezierCurveTo(x + 10*s, y + 2*s, x + 5*s, y - 3*s, x, y + 3*s); ctx.closePath();
-  }
-  // HUD يُرسم بإحداثيات الشاشة (منطقة آمنة) فلا يُقصّ على أي حجم
-  function drawHUD() {
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const pad = 18, top = 20;
-    for (let i = 0; i < MAX_HEARTS; i++) {
-      const x = pad + 14 + i * 34, y = top;
-      heartPath(x, y, 1.5);
-      ctx.fillStyle = i < player.hearts ? "#ff3b5c" : "rgba(255,255,255,0.16)"; ctx.fill();
-      ctx.lineWidth = 1.4; ctx.strokeStyle = "rgba(0,0,0,0.5)"; ctx.stroke();
-    }
-    ctx.textAlign = "right"; ctx.shadowColor = "rgba(0,0,0,0.75)"; ctx.shadowBlur = 6;
-    const fs = Math.max(22, Math.min(34, Math.round(cssH * 0.05)));
-    ctx.font = "bold " + fs + "px Arial"; ctx.fillStyle = "#ffffff";
-    ctx.fillText("النقاط: " + game.score, cssW - pad, top + fs * 0.55);
-    ctx.font = "bold " + Math.round(fs * 0.72) + "px Arial"; ctx.fillStyle = "#ff9a4d";
-    ctx.fillText("🧟 " + game.kills, cssW - pad, top + fs * 1.5);
-    ctx.shadowBlur = 0; ctx.textAlign = "left";
-  }
-  function roundRect(x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
-
-  /* ============================================================
-     الشاشات والإعدادات
-     ============================================================ */
-  const startScreen = document.getElementById("startScreen");
-  const settingsScreen = document.getElementById("settingsScreen");
-  const gameOverScreen = document.getElementById("gameOverScreen");
-  const finalScoreEl = document.getElementById("finalScore");
-  const bestScoreEl = document.getElementById("bestScore");
-  function show(el) { [startScreen, settingsScreen, gameOverScreen].forEach(s => s.classList.add("hidden")); if (el) el.classList.remove("hidden"); }
-  function startGame() { if (!assetsReady) return; Sound.resume(); resetGame(); state = State.PLAY; show(null); Sound.startMusic(); }
-  function gameOver() { state = State.OVER; Sound.sample("gameover", 0.9); Sound.stopMusic(); if (game.score > best) { best = game.score; localStorage.setItem("zombieRunBest", String(best)); } finalScoreEl.textContent = game.score; bestScoreEl.textContent = best; show(gameOverScreen); }
-  function goMenu() { state = State.MENU; Sound.stopMusic(); show(startScreen); }
-
-  document.getElementById("startBtn").addEventListener("click", startGame);
-  document.getElementById("restartBtn").addEventListener("click", startGame);
-  document.getElementById("menuBtn").addEventListener("click", goMenu);
-  document.getElementById("settingsBtn").addEventListener("click", () => { Sound.resume(); show(settingsScreen); });
-  document.getElementById("settingsBackBtn").addEventListener("click", () => show(startScreen));
-
-  const sfxToggle = document.getElementById("sfxToggle"), musicToggle = document.getElementById("musicToggle"), diffSeg = document.getElementById("diffSeg");
-  function syncSettingsUI() { sfxToggle.classList.toggle("on", settings.sfx); musicToggle.classList.toggle("on", settings.music); diffSeg.querySelectorAll("button").forEach(b => b.classList.toggle("active", b.dataset.diff === settings.diff)); }
-  sfxToggle.addEventListener("click", () => { settings.sfx = !settings.sfx; Sound.sfxOn = settings.sfx; localStorage.setItem("zr_sfx", settings.sfx ? "1" : "0"); syncSettingsUI(); if (settings.sfx) Sound.sample("shoot", 0.5); });
-  musicToggle.addEventListener("click", () => { settings.music = !settings.music; localStorage.setItem("zr_music", settings.music ? "1" : "0"); Sound.setMusicEnabled(settings.music); syncSettingsUI(); });
-  diffSeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => { settings.diff = b.dataset.diff; localStorage.setItem("zr_diff", settings.diff); syncSettingsUI(); }));
-  syncSettingsUI();
-
-  function loop() { update(); draw(); requestAnimationFrame(loop); }
-  loop();
-})();
-</script>
+<script src="assets/js/main.js"></script>
 </body>
 </html>
