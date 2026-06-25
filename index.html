@@ -3,375 +3,98 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#070710" />
-<title>Legion Shop — متجرك الأول للألعاب والإلكترونيات في العراق</title>
-<meta name="description" content="ليجن شوب — وجهتك الأولى لشراء أجهزة الألعاب، PlayStation، Xbox، نينتندو، الحواسيب، الإكسسوارات والبطاقات الرقمية في العراق. أسعار منافسة، أصلي 100%، وتوصيل سريع لكل المحافظات." />
+<meta name="theme-color" content="#06060c" />
+<title>ليجون شوب | Legion Shop — متجر الاشتراكات الرقمية</title>
+<meta name="description" content="ليجون شوب — متجر الاشتراكات الرقمية في العراق. اشتراكات ChatGPT و Netflix و Adobe و Canva و Spotify و Xbox Game Pass والمزيد، أصلية 100% وبتسليم فوري وأفضل الأسعار بالدينار العراقي." />
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&family=Press+Start+2P&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
 
-<!-- ============ ANNOUNCEMENT BAR ============ -->
-<div class="topbar">
-  <div class="marquee">
-    <span>🚚 توصيل سريع لجميع محافظات العراق</span>
-    <span>✅ منتجات أصلية 100% بضمان رسمي</span>
-    <span>💳 الدفع عند الاستلام متاح</span>
-    <span>🔥 عروض أسبوعية على أحدث الأجهزة</span>
-    <span>🎮 أكبر تشكيلة ألعاب وإكسسوارات</span>
-    <span>🚚 توصيل سريع لجميع محافظات العراق</span>
-    <span>✅ منتجات أصلية 100% بضمان رسمي</span>
-    <span>💳 الدفع عند الاستلام متاح</span>
-    <span>🔥 عروض أسبوعية على أحدث الأجهزة</span>
-    <span>🎮 أكبر تشكيلة ألعاب وإكسسوارات</span>
-  </div>
+<!-- ============ TOP-LEFT TOOLBAR (desktop) ============ -->
+<div class="toolbar">
+  <button class="tool-btn" aria-label="آمن"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
+  <button class="tool-btn" aria-label="الإشعارات"><span class="tool-dot"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></button>
+  <button class="tool-btn js-search" aria-label="بحث"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
 </div>
 
-<!-- ============ HEADER ============ -->
-<header class="header" id="header">
-  <div class="container">
-    <nav class="nav">
-      <button class="icon-btn hamburger" id="menuBtn" aria-label="القائمة">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-      <a href="#home" class="brand" aria-label="Legion Shop"><img src="assets/img/logo.svg" alt="Legion Shop" /></a>
-
-      <ul class="nav-links">
-        <li><a href="#home">الرئيسية</a></li>
-        <li><a href="#categories">الأقسام</a></li>
-        <li><a href="#products">المنتجات</a></li>
-        <li><a href="#deal">العروض</a></li>
-        <li><a href="#why">لماذا نحن</a></li>
-        <li><a href="#contact">تواصل معنا</a></li>
-      </ul>
-
-      <div class="search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="search" id="searchInput" placeholder="ابحث عن منتج، علامة تجارية…" aria-label="بحث" />
-      </div>
-
-      <div class="nav-actions">
-        <button class="icon-btn" aria-label="المفضلة">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21l7.7-7.6 1.1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>
-        </button>
-        <button class="icon-btn" aria-label="حسابي">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
-        </button>
-        <button class="icon-btn" id="cartBtn" aria-label="السلة">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2.3 12.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L21.5 7H6"/></svg>
-          <span class="badge-count" id="cartBadge">0</span>
-        </button>
-      </div>
-    </nav>
-  </div>
-</header>
-
-<main>
-<!-- ============ HERO ============ -->
-<section class="hero section" id="home">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <span class="hero-badge reveal"><span class="dot"></span> الأول في العراق لعالم الألعاب</span>
-        <h1 class="reveal d1">ادخل عالم <span class="text-grad">الألعاب</span> بأعلى مستوى من الاحتراف</h1>
-        <p class="lead reveal d2">من أجهزة PlayStation و Xbox ونينتندو، إلى الحواسيب والإكسسوارات والبطاقات الرقمية — كل ما يحتاجه اللاعب الحقيقي في مكان واحد، أصلي ومضمون وبأفضل الأسعار.</p>
-        <div class="hero-cta reveal d3">
-          <a href="#products" class="btn btn-primary btn-lg">تسوّق الآن
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
-          </a>
-          <a href="#deal" class="btn btn-ghost btn-lg">عروض اليوم 🔥</a>
-        </div>
-        <div class="hero-stats reveal d4">
-          <div class="stat"><div class="num"><span data-count="45000" data-suffix="+">0</span></div><div class="lbl">عميل سعيد</div></div>
-          <div class="stat"><div class="num"><span data-count="1200" data-suffix="+">0</span></div><div class="lbl">منتج متوفر</div></div>
-          <div class="stat"><div class="num"><span data-count="18">0</span></div><div class="lbl">محافظة نوصل إليها</div></div>
-          <div class="stat"><div class="num"><span data-count="99" data-suffix="%">0</span></div><div class="lbl">رضا العملاء</div></div>
-        </div>
-      </div>
-
-      <div class="hero-visual" id="heroVisual">
-        <div class="hero-orb"></div>
-        <div class="hero-ring r1"></div>
-        <div class="hero-ring r2"></div>
-        <div class="hero-card">
-          <div class="ctrl-art">🎮</div>
-          <span class="pill">🔥 الأكثر مبيعاً</span>
-          <h3>PlayStation 5 Pro</h3>
-          <div class="price"><span class="now">1,090,000 د.ع</span><span class="was">1,190,000</span></div>
-        </div>
-        <div class="hero-float hf-1"><span class="ic">🚚</span> توصيل سريع</div>
-        <div class="hero-float hf-2"><span class="ic">🛡️</span> ضمان رسمي</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TRUST STRIP ============ -->
-<section class="trust">
-  <div class="container">
-    <div class="trust-grid">
-      <div class="trust-item reveal">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h13v13H1zM14 8h4l3 3v5h-7zM5.5 19.5a2 2 0 1 0 0-.1zM17.5 19.5a2 2 0 1 0 0-.1z"/></svg></span>
-        <div><h4>توصيل سريع</h4><p>لكل محافظات العراق</p></div>
-      </div>
-      <div class="trust-item reveal d1">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></span>
-        <div><h4>منتجات أصلية</h4><p>بضمان رسمي معتمد</p></div>
-      </div>
-      <div class="trust-item reveal d2">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span>
-        <div><h4>دفع آمن</h4><p>عند الاستلام أو إلكترونياً</p></div>
-      </div>
-      <div class="trust-item reveal d3">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.9A8.5 8.5 0 1 1 21 11.5Z"/></svg></span>
-        <div><h4>دعم 24/7</h4><p>فريق جاهز لمساعدتك</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CATEGORIES ============ -->
-<section class="section" id="categories">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">تسوّق حسب القسم</span>
-      <h2>استكشف <span class="text-grad">أقسامنا</span></h2>
-      <p>كل ما تحتاجه من عالم الألعاب والتقنية مرتّب بعناية لتصل إلى ما تريده بسرعة.</p>
-    </div>
-    <div class="cat-grid" id="categoryGrid"></div>
-  </div>
-</section>
-
-<!-- ============ PRODUCTS ============ -->
-<section class="section" id="products">
-  <div class="container">
-    <div class="section-head head-row">
-      <div class="reveal">
-        <span class="eyebrow">مختارات ليجن</span>
-        <h2>الأكثر <span class="text-grad">مبيعاً</span></h2>
-      </div>
-    </div>
-    <div class="filter-bar reveal" id="filterBar"></div>
-    <div class="product-grid" id="productGrid"></div>
-  </div>
-</section>
-
-<!-- ============ DEAL / PROMO ============ -->
-<section class="section" id="deal">
-  <div class="container">
-    <div class="promo reveal">
-      <div class="promo-copy">
-        <span class="eyebrow">عرض محدود</span>
-        <h2>صفقة الأسبوع <span class="text-grad">خصم حتى ٢٥٪</span></h2>
-        <p>أحدث أجهزة وإكسسوارات الألعاب بأسعار لا تُقاوَم — الكميات محدودة، والعرض ينتهي قريباً!</p>
-        <a href="#products" class="btn btn-primary btn-lg">احصل على العرض</a>
-        <div class="countdown" id="countdown">
-          <div class="cd-box"><div class="n" data-h>00</div><div class="u">ساعة</div></div>
-          <div class="cd-box"><div class="n" data-m>00</div><div class="u">دقيقة</div></div>
-          <div class="cd-box"><div class="n" data-s>00</div><div class="u">ثانية</div></div>
-        </div>
-      </div>
-      <div class="promo-visual"><div class="big">🎁</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ BRANDS ============ -->
-<section class="brands">
-  <div style="padding:1.6rem 0">
-    <div class="brands-track">
-      <span class="brand-logo">🎮 PlayStation</span>
-      <span class="brand-logo">🟢 Xbox</span>
-      <span class="brand-logo">🍄 Nintendo</span>
-      <span class="brand-logo">💻 Lenovo Legion</span>
-      <span class="brand-logo">🐍 Razer</span>
-      <span class="brand-logo">🎧 SteelSeries</span>
-      <span class="brand-logo">🖱️ Logitech</span>
-      <span class="brand-logo">🖥️ ASUS ROG</span>
-      <span class="brand-logo">🎮 PlayStation</span>
-      <span class="brand-logo">🟢 Xbox</span>
-      <span class="brand-logo">🍄 Nintendo</span>
-      <span class="brand-logo">💻 Lenovo Legion</span>
-      <span class="brand-logo">🐍 Razer</span>
-      <span class="brand-logo">🎧 SteelSeries</span>
-      <span class="brand-logo">🖱️ Logitech</span>
-      <span class="brand-logo">🖥️ ASUS ROG</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============ WHY US ============ -->
-<section class="section" id="why">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">لماذا ليجن شوب</span>
-      <h2>تجربة تسوّق <span class="text-grad">تستحق ثقتك</span></h2>
-      <p>نوفّر لك أكثر من مجرد منتج — نقدّم تجربة كاملة من الجودة، السرعة، والدعم.</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-card reveal">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg></span>
-        <h3>أصالة مضمونة</h3>
-        <p>كل منتج أصلي 100% ويأتي بضمان رسمي معتمد، لتشتري وأنت مطمئن تماماً.</p>
-      </div>
-      <div class="why-card reveal d1">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></span>
-        <h3>توصيل سريع</h3>
-        <p>نوصل طلبك إلى بابك في بغداد وكل المحافظات بأسرع وقت ممكن وبتغليف آمن.</p>
-      </div>
-      <div class="why-card reveal d2">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-3.9A8.5 8.5 0 1 1 21 11.5Z"/></svg></span>
-        <h3>دعم متواصل</h3>
-        <p>فريق خدمة العملاء جاهز للرد على استفساراتك ومساعدتك قبل وبعد الشراء.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TESTIMONIALS ============ -->
-<section class="section">
-  <div class="container">
-    <div class="section-head reveal">
-      <span class="eyebrow">آراء عملائنا</span>
-      <h2>ماذا يقول <span class="text-grad">اللاعبون</span> عنّا</h2>
-    </div>
-    <div class="tst-grid">
-      <div class="tst-card reveal">
-        <div class="stars" style="color:var(--gold)">★★★★★</div>
-        <p>«طلبت بلايستيشن 5 ووصلني خلال يوم واحد لبغداد، أصلي ومغلّف بشكل ممتاز. تجربة شراء محترمة جداً.»</p>
-        <div class="tst-author"><div class="tst-avatar">ح</div><div><div class="name">حسين العامري</div><div class="role">بغداد</div></div></div>
-      </div>
-      <div class="tst-card reveal d1">
-        <div class="stars" style="color:var(--gold)">★★★★★</div>
-        <p>«أفضل متجر تعاملت معه لشراء إكسسوارات الألعاب. الأسعار منافسة والدعم يرد بسرعة على كل سؤال.»</p>
-        <div class="tst-author"><div class="tst-avatar">ز</div><div><div class="name">زينب كريم</div><div class="role">البصرة</div></div></div>
-      </div>
-      <div class="tst-card reveal d2">
-        <div class="stars" style="color:var(--gold)">★★★★★</div>
-        <p>«اشتريت لابتوب Legion للألعاب وكان الجهاز جديد بالكرتون وبضمان. صار متجري المفضّل بدون منافس.»</p>
-        <div class="tst-author"><div class="tst-avatar">م</div><div><div class="name">مصطفى الدليمي</div><div class="role">أربيل</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ NEWSLETTER ============ -->
-<section class="section" id="contact">
-  <div class="container">
-    <div class="newsletter reveal">
-      <h2>اشترك واحصل على <span class="text-grad">أحدث العروض</span></h2>
-      <p>كن أول من يعرف بالتخفيضات والمنتجات الجديدة فور وصولها — مباشرة إلى بريدك.</p>
-      <form class="nl-form" id="nlForm">
-        <input type="email" placeholder="أدخل بريدك الإلكتروني" required aria-label="البريد الإلكتروني" />
-        <button type="submit" class="btn btn-primary">اشترك الآن</button>
-      </form>
-    </div>
-  </div>
-</section>
-</main>
-
-<!-- ============ FOOTER ============ -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="brand"><img src="assets/img/logo.svg" alt="Legion Shop" /></div>
-        <p class="about">ليجن شوب — وجهتك الأولى لعالم الألعاب والإلكترونيات في العراق. منتجات أصلية، أسعار منافسة، وخدمة تليق بك.</p>
-        <div class="socials">
-          <a href="#" class="social" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-          <a href="#" class="social" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v7h3v-7h3l1-3h-4v-2c0-.6.4-1 1-1Z"/></svg></a>
-          <a href="#" class="social" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.2-.2-1.2-1.5-1.2-2.9 0-1.3.7-2 1-2.2.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.4.6-.3.3c-.2.2-.3.4-.1.7.2.3.9 1.4 1.9 2.2 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.6.3.1.3.1.7-.1 1.2Z"/></svg></a>
-          <a href="#" class="social" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.5 4.3 2.8 11.5c-1 .4-1 1.8.1 2.1l4.6 1.4 1.8 5.6c.2.7 1.1.9 1.6.3l2.5-2.6 4.7 3.5c.7.5 1.6.1 1.8-.7l3.2-15c.2-1-.8-1.8-1.6-1.3ZM9.6 14.3l8.3-5.2c.2-.1.4.2.2.3l-6.7 6.2c-.2.2-.4.5-.4.8l-.2 2.2-1.2-3.6c-.1-.4 0-.8.2-.9Z"/></svg></a>
-        </div>
-      </div>
-
-      <div>
-        <h4>تسوّق</h4>
-        <ul class="footer-links">
-          <li><a href="#categories">جميع الأقسام</a></li>
-          <li><a href="#products">الأكثر مبيعاً</a></li>
-          <li><a href="#deal">العروض والتخفيضات</a></li>
-          <li><a href="#products">وصل حديثاً</a></li>
-          <li><a href="#products">البطاقات الرقمية</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>روابط مهمة</h4>
-        <ul class="footer-links">
-          <li><a href="#why">من نحن</a></li>
-          <li><a href="#contact">تواصل معنا</a></li>
-          <li><a href="#">سياسة الإرجاع</a></li>
-          <li><a href="#">الشحن والتوصيل</a></li>
-          <li><a href="#">الأسئلة الشائعة</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>تواصل معنا</h4>
-        <div class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 3.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L7.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg><span>+964 770 000 0000</span></div>
-        <div class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg><span>info@legionshopiraq.com</span></div>
-        <div class="contact-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>بغداد — العراق، وتوصيل لكل المحافظات</span></div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <span>© 2026 Legion Shop — جميع الحقوق محفوظة.</span>
-      <div class="pay-methods">
-        <span class="pay">VISA</span>
-        <span class="pay">Mastercard</span>
-        <span class="pay">ZainCash</span>
-        <span class="pay">FastPay</span>
-        <span class="pay">الدفع عند الاستلام</span>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- ============ CART DRAWER ============ -->
-<div class="overlay-bg" id="overlay"></div>
-
-<aside class="cart-drawer" id="cartDrawer" aria-label="سلة التسوق">
-  <div class="cart-head">
-    <h3>🛒 سلة التسوّق</h3>
-    <button class="icon-btn" id="closeCart" aria-label="إغلاق">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
-    </button>
-  </div>
-  <div class="cart-items" id="cartItems"></div>
-  <div class="cart-foot">
-    <div class="cart-total"><span>الإجمالي</span><span class="amt" id="cartTotal">0 د.ع</span></div>
-    <button class="btn btn-primary" id="checkoutBtn">إتمام الطلب</button>
+<!-- ============ SIDEBAR (right, desktop) ============ -->
+<aside class="sidebar">
+  <a href="#/" class="sidebar-logo" aria-label="Legion Shop"><span class="logo-pixel">LEGION<br>SHOP</span></a>
+  <nav class="sidebar-nav" id="sidebarNav"></nav>
+  <div class="sidebar-spacer"></div>
+  <div class="sidebar-foot">
+    <a href="#/" class="js-cart nav-item" style="cursor:pointer">
+      <span class="nav-ic" style="position:relative"><span class="cart-count">0</span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h2.2l2.3 12.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L21.5 7H6"/></svg></span>
+      <span class="nav-label">السلة</span>
+    </a>
+    <a href="#/account" class="nav-item">
+      <span class="nav-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg></span>
+      <span class="nav-label">طلباتي</span>
+    </a>
+    <a href="#/login" class="btn-login"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4"/><path d="M10 8l4 4-4 4M14 12H4"/></svg> تسجيل الدخول</a>
   </div>
 </aside>
 
-<!-- ============ MOBILE MENU ============ -->
-<nav class="mobile-menu" id="mobileMenu" aria-label="القائمة الرئيسية">
-  <div class="mm-head">
-    <img src="assets/img/logo.svg" alt="Legion Shop" style="height:36px" />
-    <button class="icon-btn" id="closeMenu" aria-label="إغلاق">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
-    </button>
+<!-- ============ APP ============ -->
+<div class="app-main">
+  <!-- mobile app bar -->
+  <header class="appbar">
+    <button class="tool-btn" id="navBtn" aria-label="القائمة"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a href="#/" class="logo-pixel" style="text-decoration:none">LEGION SHOP</a>
+    <div class="ab-actions">
+      <button class="tool-btn js-search" aria-label="بحث"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+      <button class="tool-btn js-cart" aria-label="السلة" style="position:relative"><span class="cart-count">0</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h2.2l2.3 12.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L21.5 7H6"/></svg></button>
+    </div>
+  </header>
+
+  <main class="container" id="view"></main>
+</div>
+
+<!-- ============ SCRIM + DRAWERS ============ -->
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer cart-drawer" id="cartDrawer" aria-label="سلة التسوق">
+  <div class="drawer-head">
+    <h3><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h2.2l2.3 12.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L21.5 7H6"/></svg> سلة التسوّق</h3>
+    <button class="close-x" aria-label="إغلاق"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
   </div>
-  <a href="#home">🏠 الرئيسية</a>
-  <a href="#categories">🗂️ الأقسام</a>
-  <a href="#products">🎮 المنتجات</a>
-  <a href="#deal">🔥 العروض</a>
-  <a href="#why">⭐ لماذا نحن</a>
-  <a href="#contact">📞 تواصل معنا</a>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total-row"><span>الإجمالي</span><span class="amt" id="cartTotal"><span class="m-n">0</span> <span class="m-c">د.ع</span></span></div>
+    <button class="btn btn-primary btn-block" id="checkout">إتمام الطلب</button>
+  </div>
+</aside>
+
+<nav class="drawer nav-drawer" id="navDrawer" aria-label="القائمة">
+  <div class="drawer-brand">
+    <span class="logo-pixel">LEGION SHOP</span>
+    <button class="close-x" aria-label="إغلاق"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+  </div>
+  <div id="drawerNav"></div>
+  <div class="sidebar-foot" style="margin-top:14px">
+    <a href="#/login" class="btn-login"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4"/><path d="M10 8l4 4-4 4M14 12H4"/></svg> تسجيل الدخول</a>
+  </div>
 </nav>
 
-<!-- Back to top -->
-<button class="to-top" id="toTop" aria-label="العودة للأعلى">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
-</button>
+<!-- ============ SEARCH MODAL ============ -->
+<div class="search-modal" id="searchModal">
+  <button class="close-x" aria-label="إغلاق"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+  <div class="search-bar">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="search" id="globalSearch" placeholder="ابحث عن منتج أو خدمة…" aria-label="بحث" />
+  </div>
+  <div class="search-results" id="searchResults"><p class="search-hint">اكتب اسم منتج أو خدمة للبحث…</p></div>
+</div>
 
-<!-- Toasts -->
-<div class="toast-wrap" id="toastWrap"></div>
+<!-- back to top + toasts -->
+<button class="to-top" id="toTop" aria-label="العودة للأعلى"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+<div class="toasts" id="toasts"></div>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/app.js"></script>
 </body>
 </html>
