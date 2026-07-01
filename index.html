@@ -3,95 +3,119 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#06060c" />
+<meta name="theme-color" content="#050508" />
 <title>ليجون شوب | Legion Shop — متجر الاشتراكات الرقمية</title>
-<meta name="description" content="ليجون شوب — متجر الاشتراكات الرقمية في العراق. اشتراكات ChatGPT و Netflix و Adobe و Canva و Spotify و Xbox Game Pass والمزيد، أصلية 100% وبتسليم فوري وأفضل الأسعار بالدينار العراقي." />
+<meta name="description" content="ليجون شوب — متجر الاشتراكات الرقمية في العراق. اشتراكات ChatGPT و Netflix و Adobe و Canva و Gemini و Xbox Game Pass والمزيد، أصلية 100% بتسليم فوري وأفضل الأسعار بالدينار العراقي." />
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&family=Press+Start+2P&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body>
 
-<!-- ============ TOP-LEFT TOOLBAR (desktop) ============ -->
-<div class="toolbar">
-  <button class="tool-btn" aria-label="آمن"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
-  <button class="tool-btn" aria-label="الإشعارات"><span class="tool-dot"></span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></button>
-  <button class="tool-btn js-search" aria-label="بحث"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
+<!-- أدوات أعلى اليسار: حقيبة (السلة) + إشعارات + بحث -->
+<div class="tools">
+  <button class="tbtn js-cart" aria-label="السلة">
+    <span class="cart-n">0</span>
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+  </button>
+  <button class="tbtn" aria-label="الإشعارات">
+    <span class="dot"></span>
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>
+  </button>
+  <button class="tbtn js-find" aria-label="بحث">
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+  </button>
 </div>
 
-<!-- ============ SIDEBAR (right, desktop) ============ -->
+<!-- الشريط الجانبي اليمين -->
 <aside class="sidebar">
-  <a href="#/" class="sidebar-logo" aria-label="Legion Shop"><span class="logo-pixel">LEGION<br>SHOP</span></a>
-  <nav class="sidebar-nav" id="sidebarNav"></nav>
-  <div class="sidebar-spacer"></div>
-  <div class="sidebar-foot">
-    <a href="#/" class="js-cart nav-item" style="cursor:pointer">
-      <span class="nav-ic" style="position:relative"><span class="cart-count">0</span><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h2.2l2.3 12.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L21.5 7H6"/></svg></span>
-      <span class="nav-label">السلة</span>
+  <a class="side-logo" href="#/" aria-label="Legion Shop"><span class="logo-pixel">LEGION<br>SHOP</span></a>
+  <nav class="side-nav main-nav"></nav>
+  <div class="side-gap"></div>
+  <div class="side-foot">
+    <nav class="side-nav" style="border:0;padding:0">
+      <a href="#" class="js-cart" onclick="return false">
+        <span class="ico" style="position:relative">
+          <span class="cart-n">0</span>
+          <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+        </span>
+        <span class="lbl">السلة</span>
+      </a>
+      <a href="#/account">
+        <span class="ico"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg></span>
+        <span class="lbl">طلباتي</span>
+      </a>
+    </nav>
+    <a class="btn-login" href="#/login">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4"/><path d="M10 8l4 4-4 4M14 12H4"/></svg>
+      <span class="txt">تسجيل الدخول</span>
     </a>
-    <a href="#/account" class="nav-item">
-      <span class="nav-ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg></span>
-      <span class="nav-label">طلباتي</span>
-    </a>
-    <a href="#/login" class="btn-login"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4"/><path d="M10 8l4 4-4 4M14 12H4"/></svg> تسجيل الدخول</a>
   </div>
 </aside>
 
-<!-- ============ APP ============ -->
-<div class="app-main">
-  <!-- mobile app bar -->
+<!-- المحتوى -->
+<div class="app">
   <header class="appbar">
-    <button class="tool-btn" id="navBtn" aria-label="القائمة"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-    <a href="#/" class="logo-pixel" style="text-decoration:none">LEGION SHOP</a>
-    <div class="ab-actions">
-      <button class="tool-btn js-search" aria-label="بحث"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button>
-      <button class="tool-btn js-cart" aria-label="السلة" style="position:relative"><span class="cart-count">0</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h2.2l2.3 12.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L21.5 7H6"/></svg></button>
-    </div>
+    <button class="tbtn js-menu" aria-label="القائمة">
+      <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a class="logo-pixel" href="#/">LEGION SHOP</a>
+    <button class="tbtn js-find" aria-label="بحث">
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    </button>
+    <button class="tbtn js-cart" aria-label="السلة">
+      <span class="cart-n">0</span>
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>
+    </button>
   </header>
 
-  <main class="container" id="view"></main>
+  <main class="wrap" id="view"></main>
 </div>
 
-<!-- ============ SCRIM + DRAWERS ============ -->
-<div class="scrim" id="scrim"></div>
+<!-- طبقة التعتيم -->
+<div class="dim" id="dim"></div>
 
-<aside class="drawer cart-drawer" id="cartDrawer" aria-label="سلة التسوق">
-  <div class="drawer-head">
-    <h3><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h2.2l2.3 12.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L21.5 7H6"/></svg> سلة التسوّق</h3>
-    <button class="close-x" aria-label="إغلاق"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+<!-- درج السلة (من اليسار — جهة أيقونة الحقيبة) -->
+<aside class="cart-drawer" id="cartDrawer" aria-label="سلة التسوق">
+  <div class="drawer-top">
+    <h3><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1L6 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg> سلة التسوق</h3>
+    <button class="shut" aria-label="إغلاق"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
   </div>
-  <div class="cart-items" id="cartItems"></div>
-  <div class="cart-foot">
-    <div class="cart-total-row"><span>الإجمالي</span><span class="amt" id="cartTotal"><span class="m-n">0</span> <span class="m-c">د.ع</span></span></div>
-    <button class="btn btn-primary btn-block" id="checkout">إتمام الطلب</button>
+  <div class="cart-list" id="cartItems"></div>
+  <div class="cart-bottom">
+    <div class="sumrow"><span>الإجمالي</span><span class="amt" id="cartSum"><b class="mn">0</b> <i class="mc">د.ع</i></span></div>
+    <button class="btn grad wide" id="checkout">إتمام الطلب</button>
   </div>
 </aside>
 
-<nav class="drawer nav-drawer" id="navDrawer" aria-label="القائمة">
-  <div class="drawer-brand">
-    <span class="logo-pixel">LEGION SHOP</span>
-    <button class="close-x" aria-label="إغلاق"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+<!-- قائمة الجوال (من اليمين) -->
+<nav class="nav-drawer" id="navDrawer" aria-label="القائمة">
+  <div class="drawer-top">
+    <span class="logo-pixel" style="font-size:11px">LEGION SHOP</span>
+    <button class="shut" aria-label="إغلاق"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
   </div>
-  <div id="drawerNav"></div>
-  <div class="sidebar-foot" style="margin-top:14px">
-    <a href="#/login" class="btn-login"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4"/><path d="M10 8l4 4-4 4M14 12H4"/></svg> تسجيل الدخول</a>
-  </div>
+  <div class="side-nav main-nav"></div>
+  <a class="btn-login" href="#/login">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4"/><path d="M10 8l4 4-4 4M14 12H4"/></svg>
+    <span class="txt">تسجيل الدخول</span>
+  </a>
 </nav>
 
-<!-- ============ SEARCH MODAL ============ -->
-<div class="search-modal" id="searchModal">
-  <button class="close-x" aria-label="إغلاق"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
-  <div class="search-bar">
-    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-    <input type="search" id="globalSearch" placeholder="ابحث عن منتج أو خدمة…" aria-label="بحث" />
+<!-- البحث -->
+<div class="find" id="find">
+  <button class="shut" aria-label="إغلاق"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg></button>
+  <div class="find-bar">
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="search" id="findInput" placeholder="ابحث في المنتجات..." aria-label="بحث" />
   </div>
-  <div class="search-results" id="searchResults"><p class="search-hint">اكتب اسم منتج أو خدمة للبحث…</p></div>
+  <div class="find-results" id="findResults"><p class="hint">اكتب اسم منتج أو خدمة للبحث…</p></div>
 </div>
 
-<!-- back to top + toasts -->
-<button class="to-top" id="toTop" aria-label="العودة للأعلى"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+<button class="to-top" id="toTop" aria-label="العودة للأعلى">
+  <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</button>
 <div class="toasts" id="toasts"></div>
 
 <script src="assets/js/data.js"></script>
