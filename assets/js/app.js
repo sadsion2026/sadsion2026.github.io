@@ -63,13 +63,18 @@
      COMPONENTS
      ================================================================= */
 
-  /* فن 3D للمنتج — بطاقة مكدسة بلون العلامة */
+  /* فن 3D للمنتج — بطاقة مكدسة بشعار العلامة الحقيقي */
+  const brandLogo = (l, cls = "blogo") => {
+    const u = `url('assets/img/brands/${l}.svg')`;
+    return `<b class="${cls}" style="-webkit-mask-image:${u};mask-image:${u}"></b>`;
+  };
   function art(p, size = "") {
     const isTxt = /^[A-Za-z▦❋✦✄✕♫▶C]+$/.test(p.glyph);
+    const face = p.logo ? brandLogo(p.logo) : `<b class="${isTxt ? "t" : "e"}">${esc(p.glyph)}</b>`;
     return `<div class="art ${size}" style="--ac:${p.color}">
       <span class="art-rays"></span>
       <span class="art-stack s3"></span><span class="art-stack s2"></span>
-      <span class="art-face"><b class="${isTxt ? "t" : "e"}">${esc(p.glyph)}</b><i>${esc(p.brand)}</i></span>
+      <span class="art-face">${face}<i>${esc(p.brand)}</i></span>
       <span class="art-shelf"></span>
     </div>`;
   }
@@ -119,7 +124,7 @@
         <div class="slide ${i === 0 ? "on" : ""}" style="--c1:${s.c1};--c2:${s.c2}">
           <div class="slide-art">
             <span class="slide-glow"></span>
-            ${s.chips.map((ch, j) => `<span class="fchip p${j}" style="--cc:${ch.c}">${esc(ch.g)}</span>`).join("")}
+            ${s.chips.map((ch, j) => `<span class="fchip p${j}" style="--cc:${ch.c}" data-depth="${(j % 3) + 1}">${ch.l ? brandLogo(ch.l, "blogo chip-logo") : esc(ch.g)}</span>`).join("")}
           </div>
           <div class="slide-copy">
             <h1>${esc(s.title)}</h1>
@@ -143,8 +148,16 @@
   /* =================================================================
      VIEWS
      ================================================================= */
+  function brandStripHTML() {
+    const items = DATA.brandStrip.map((b) =>
+      `<span class="mitem">${brandLogo(b.l, "blogo mlogo")}<i>${esc(b.n)}</i></span>`).join("");
+    return `<section class="marq reveal" aria-hidden="true">
+      <div class="marq-track">${items}${items}</div>
+    </section>`;
+  }
+
   function vHome() {
-    return heroHTML() + `
+    return heroHTML() + brandStripHTML() + `
       <section class="sec reveal">
         <div class="sec-head">
           <a class="sec-all" href="#/categories">الكل ${ic("arrowL", 15)}</a>
@@ -308,7 +321,11 @@
 
     document.body.classList.toggle("is-login", path === "/login");
     document.body.classList.toggle("is-product", path.startsWith("/product/"));
-    $("#view").innerHTML = html;
+    const view = $("#view");
+    view.classList.remove("page-in");
+    view.innerHTML = html;
+    void view.offsetWidth; /* إعادة تشغيل أنميشن دخول الصفحة */
+    view.classList.add("page-in");
     $$(".main-nav a").forEach((a) => a.classList.toggle("on", a.getAttribute("data-r") === key));
     window.scrollTo({ top: 0 });
     revealAll();
@@ -320,6 +337,21 @@
     $("#heroPrev")?.addEventListener("click", () => { heroGo(heroIdx - 1); heroPlay(); });
     $("#heroNext")?.addEventListener("click", () => { heroGo(heroIdx + 1); heroPlay(); });
     $$("#heroDots button").forEach((d) => d.addEventListener("click", () => { heroGo(+d.dataset.i); heroPlay(); }));
+    /* بارالاكس ناعم لعناصر الهيرو مع حركة المؤشر */
+    const hero = $(".hero");
+    if (hero && matchMedia("(pointer:fine)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches) {
+      hero.addEventListener("mousemove", (e) => {
+        const r = hero.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        $$(".slide.on .fchip", hero).forEach((ch) => {
+          const d = +ch.dataset.depth || 1;
+          ch.style.setProperty("--px", `${x * d * -10}px`);
+          ch.style.setProperty("--py", `${y * d * -8}px`);
+        });
+      });
+      hero.addEventListener("mouseleave", () =>
+        $$(".fchip", hero).forEach((ch) => { ch.style.setProperty("--px", "0px"); ch.style.setProperty("--py", "0px"); }));
+    }
   }
 
   /* =================================================================
@@ -356,7 +388,7 @@
       box.innerHTML = cart.length ? cart.map((x) => {
         const p = byId(x.id), pl = p.plans[x.plan];
         return `<div class="ci">
-          <span class="ci-art" style="--ac:${p.color}"><b>${esc(p.glyph)}</b></span>
+          <span class="ci-art" style="--ac:${p.color}">${p.logo ? brandLogo(p.logo, "blogo ci-logo") : `<b>${esc(p.glyph)}</b>`}</span>
           <div class="ci-info">
             <h4>${esc(p.name)}</h4>
             <i>${esc(pl.name)} · ${pl.days} يوم</i>
@@ -400,6 +432,9 @@
     io ||= new IntersectionObserver((es) => es.forEach((e) => {
       if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
     }), { threshold: 0.08, rootMargin: "0px 0px -30px 0px" });
+    /* تتابع (stagger) لعناصر الشبكات والصفوف */
+    $$(".hscroll, .pgrid, .cats-row, .plans").forEach((c) =>
+      [...c.children].forEach((el, i) => el.style.setProperty("--i", i % 10)));
     $$(".reveal:not(.in)").forEach((el) => io.observe(el));
   }
 

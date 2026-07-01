@@ -24,7 +24,7 @@ const D_EMAIL   = { icon: "mail", label: "يتطلب بريد إلكتروني",
 /* ---------- المنتجات (أسماء/أسعار/باقات/أوصاف من الصور) ---------- */
 window.LEGION.products = [
   {
-    id: "chatgpt", name: "اشتراك Chatgpt الاصلي", cat: "ai", brand: "OpenAI",
+    id: "chatgpt", logo: "openai", name: "اشتراك Chatgpt الاصلي", cat: "ai", brand: "OpenAI",
     glyph: "❋", color: "#7c3aed", featured: true, purchases: 14, delivery: D_EMAIL,
     plans: [
       { name: "شهر واحد", days: 30,  price: 7000 },
@@ -39,7 +39,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "gemini", name: "اشتراك Gemini الاصلي", cat: "ai", brand: "Google",
+    id: "gemini", logo: "gemini", name: "اشتراك Gemini الاصلي", cat: "ai", brand: "Google",
     glyph: "✦", color: "#3b82f6", featured: true, purchases: 13, delivery: D_EMAIL,
     plans: [
       { name: "شهر واحد", days: 30,  price: 10000 },
@@ -53,7 +53,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "adobe", name: "اشتراك Adobe الاصلي", cat: "design", brand: "Adobe",
+    id: "adobe", logo: "adobe", name: "اشتراك Adobe الاصلي", cat: "design", brand: "Adobe",
     glyph: "A", color: "#dc2626", featured: true, purchases: 21, delivery: D_INSTANT,
     plans: [
       { name: "شهر واحد", days: 30,  price: 15000 },
@@ -67,7 +67,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "capcut", name: "اشتراك CapCut اصلي", cat: "design", brand: "CapCut",
+    id: "capcut", logo: "capcut", name: "اشتراك CapCut اصلي", cat: "design", brand: "CapCut",
     glyph: "✄", color: "#0ea5b7", featured: true, purchases: 18, delivery: D_EMAIL,
     plans: [
       { name: "شهر واحد", days: 30,  price: 10000 },
@@ -81,7 +81,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "capcut-pro", name: "كب كات برو (شهر)", cat: "design", brand: "CapCut",
+    id: "capcut-pro", logo: "capcut", name: "كب كات برو (شهر)", cat: "design", brand: "CapCut",
     glyph: "✄", color: "#164e63", featured: false, purchases: 7, delivery: D_EMAIL,
     plans: [{ name: "شهر واحد", days: 30, price: 10000 }],
     about: [
@@ -90,7 +90,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "canva", name: "كانفا برو (سنة)", cat: "design", brand: "Canva",
+    id: "canva", logo: "canva", name: "كانفا برو (سنة)", cat: "design", brand: "Canva",
     glyph: "C", color: "#7d2ae8", featured: false, purchases: 9, delivery: D_INSTANT,
     plans: [
       { name: "شهر واحد", days: 30,  price: 3000 },
@@ -111,7 +111,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "netflix", name: "اشتراك Netflix الاصلي", cat: "cinema", brand: "Netflix",
+    id: "netflix", logo: "netflix", name: "اشتراك Netflix الاصلي", cat: "cinema", brand: "Netflix",
     glyph: "N", color: "#e50914", featured: true, purchases: 27, delivery: D_EMAIL,
     plans: [
       { name: "شهر واحد", days: 30,  price: 4000 },
@@ -125,7 +125,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "cimax", name: "اشتراك سيماكس", cat: "cinema", brand: "CimaX",
+    id: "cimax", logo: "cimax", name: "اشتراك سيماكس", cat: "cinema", brand: "CimaX",
     glyph: "✕", color: "#2563eb", featured: false, purchases: 32, delivery: D_INSTANT,
     plans: [
       { name: "شهر واحد", days: 30,  price: 1000 },
@@ -137,7 +137,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "cimax-premium", name: "اشتراك سيماكلوب بريميوم", cat: "cinema", brand: "CimaX",
+    id: "cimax-premium", logo: "cimax", name: "اشتراك سيماكلوب بريميوم", cat: "cinema", brand: "CimaX",
     glyph: "✕", color: "#1d4ed8", featured: false, purchases: 19, delivery: D_INSTANT,
     plans: [
       { name: "تجريبي",   days: 7,  price: 1 },
@@ -149,7 +149,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "gamepass", name: "كيم باس الالتمت مشترك بين شخصين", cat: "games", brand: "Xbox",
+    id: "gamepass", logo: "xbox", name: "كيم باس الالتمت مشترك بين شخصين", cat: "games", brand: "Xbox",
     glyph: "✕", color: "#107c10", featured: true, purchases: 15, delivery: D_INSTANT,
     plans: [
       { name: "شهرين (مشترك)",      days: 60, price: 14000 },
@@ -166,7 +166,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "nitro", name: "دسكورد نيترو (على حسابك الشخصي)", cat: "games", brand: "Discord",
+    id: "nitro", logo: "discord", name: "دسكورد نيترو (على حسابك الشخصي)", cat: "games", brand: "Discord",
     glyph: "🎮", color: "#5865f2", featured: false, purchases: 8, delivery: D_INSTANT,
     plans: [
       { name: "شهر واحد", days: 30,  price: 12000 },
@@ -178,7 +178,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "office365", name: "اوفيس 365 سنوي (حساب خاص)", cat: "software", brand: "Microsoft",
+    id: "office365", logo: "microsoftoffice", name: "اوفيس 365 سنوي (حساب خاص)", cat: "software", brand: "Microsoft",
     glyph: "▦", color: "#ea580c", featured: false, purchases: 11, delivery: D_INSTANT,
     plans: [{ name: "سنوي (حساب خاص)", days: 365, price: 25000 }],
     about: [
@@ -192,7 +192,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "spotify", name: "اشتراك Spotify Premium", cat: "music", brand: "Spotify",
+    id: "spotify", logo: "spotify", name: "اشتراك Spotify Premium", cat: "music", brand: "Spotify",
     glyph: "♫", color: "#1db954", featured: true, purchases: 17, delivery: D_EMAIL,
     plans: [
       { name: "شهر واحد", days: 30,  price: 5000 },
@@ -205,7 +205,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "ytpremium", name: "اشتراك YouTube Premium", cat: "music", brand: "YouTube",
+    id: "ytpremium", logo: "youtube", name: "اشتراك YouTube Premium", cat: "music", brand: "YouTube",
     glyph: "▶", color: "#ff0000", featured: false, purchases: 14, delivery: D_EMAIL,
     plans: [
       { name: "شهر واحد", days: 30,  price: 6000 },
@@ -217,7 +217,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "nordvpn", name: "اشتراك NordVPN", cat: "vpn", brand: "Nord",
+    id: "nordvpn", logo: "nordvpn", name: "اشتراك NordVPN", cat: "vpn", brand: "Nord",
     glyph: "🔒", color: "#4687ff", featured: false, purchases: 10, delivery: D_INSTANT,
     plans: [
       { name: "شهر واحد", days: 30,  price: 6000 },
@@ -229,7 +229,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "eset", name: "اشتراك ESET انتي فايروس", cat: "antivirus", brand: "ESET",
+    id: "eset", logo: "eset", name: "اشتراك ESET انتي فايروس", cat: "antivirus", brand: "ESET",
     glyph: "🛡️", color: "#0aa1dd", featured: false, purchases: 7, delivery: D_INSTANT,
     plans: [
       { name: "سنوي — جهاز واحد", days: 365, price: 12000 },
@@ -241,7 +241,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "notebooklm", name: "اشتراك NotebookLM", cat: "education", brand: "Google",
+    id: "notebooklm", logo: "google", name: "اشتراك NotebookLM", cat: "education", brand: "Google",
     glyph: "📓", color: "#f59e0b", featured: false, purchases: 6, delivery: D_EMAIL,
     plans: [
       { name: "شهر واحد", days: 30,  price: 8000 },
@@ -253,7 +253,7 @@ window.LEGION.products = [
     ],
   },
   {
-    id: "duolingo", name: "اشتراك Duolingo Super", cat: "education", brand: "Duolingo",
+    id: "duolingo", logo: "duolingo", name: "اشتراك Duolingo Super", cat: "education", brand: "Duolingo",
     glyph: "🦉", color: "#58cc02", featured: false, purchases: 5, delivery: D_EMAIL,
     plans: [
       { name: "شهر واحد", days: 30,  price: 5000 },
@@ -274,15 +274,16 @@ window.LEGION.homeRows = [
   { key: "design",   title: "برامج التصميم",   icon: "pen",   tint: "#fbbf24", filter: (p) => p.cat === "design" },
 ];
 
-/* ---------- شرائح الهيرو ---------- */
+/* ---------- شرائح الهيرو (بشعارات العلامات الحقيقية) ---------- */
 window.LEGION.heroSlides = [
   {
     title: "اشتراكات متنوعة",
     subtitle: "جميع الاشتراكات الرقمية في مكان واحد",
     chips: [
-      { g: "N",  c: "#e50914" }, { g: "❋", c: "#7c3aed" }, { g: "▶", c: "#ff0000" },
-      { g: "✦", c: "#3b82f6" }, { g: "C",  c: "#7d2ae8" }, { g: "♫", c: "#1db954" },
-      { g: "👑", c: "#f59e0b" },
+      { l: "netflix", c: "#e50914" }, { l: "openai",  c: "#8b5cf6" },
+      { l: "youtube", c: "#ff0000" }, { l: "gemini",  c: "#3b82f6" },
+      { l: "canva",   c: "#8b3dff" }, { l: "spotify", c: "#1db954" },
+      { l: "adobe",   c: "#ed2224" },
     ],
     c1: "#7c3aed", c2: "#a855f7",
   },
@@ -290,9 +291,10 @@ window.LEGION.heroSlides = [
     title: "العاب بليستيشن",
     subtitle: "العاب بليستيشن في مكان واحد",
     chips: [
-      { g: "🎮", c: "#3b82f6" }, { g: "🏆", c: "#8b5cf6" }, { g: "⚔️", c: "#6366f1" },
-      { g: "🕹️", c: "#7c3aed" }, { g: "👾", c: "#4f46e5" }, { g: "🎯", c: "#2563eb" },
-      { g: "🎲", c: "#818cf8" },
+      { l: "playstation", c: "#3b82f6" }, { g: "🏆", c: "#8b5cf6" },
+      { l: "xbox",        c: "#107c10" }, { l: "discord", c: "#5865f2" },
+      { g: "👾",          c: "#4f46e5" }, { l: "playstation", c: "#6366f1" },
+      { g: "🎮",          c: "#2563eb" },
     ],
     c1: "#2563eb", c2: "#7c3aed",
   },
@@ -300,10 +302,20 @@ window.LEGION.heroSlides = [
     title: "قوة الذكاء الاصطناعي",
     subtitle: "ChatGPT و Gemini وأكثر بأفضل الأسعار",
     chips: [
-      { g: "❋", c: "#7c3aed" }, { g: "✦", c: "#3b82f6" }, { g: "🤖", c: "#8b5cf6" },
-      { g: "🧠", c: "#a855f7" }, { g: "⚡", c: "#f59e0b" }, { g: "✨", c: "#6366f1" },
-      { g: "📓", c: "#f59e0b" },
+      { l: "openai", c: "#8b5cf6" }, { l: "gemini", c: "#3b82f6" },
+      { g: "🤖",     c: "#a855f7" }, { l: "google", c: "#4285f4" },
+      { g: "⚡",     c: "#f59e0b" }, { l: "openai", c: "#6366f1" },
+      { g: "✨",     c: "#c084fc" },
     ],
     c1: "#6d28d9", c2: "#4c1d95",
   },
+];
+
+/* ---------- شريط شعارات العلامات (ماركيز) ---------- */
+window.LEGION.brandStrip = [
+  { l: "netflix", n: "Netflix" }, { l: "openai", n: "OpenAI" }, { l: "gemini", n: "Gemini" },
+  { l: "adobe", n: "Adobe" }, { l: "canva", n: "Canva" }, { l: "xbox", n: "Xbox" },
+  { l: "playstation", n: "PlayStation" }, { l: "spotify", n: "Spotify" }, { l: "youtube", n: "YouTube" },
+  { l: "discord", n: "Discord" }, { l: "capcut", n: "CapCut" }, { l: "microsoftoffice", n: "Office 365" },
+  { l: "nordvpn", n: "NordVPN" }, { l: "duolingo", n: "Duolingo" },
 ];
